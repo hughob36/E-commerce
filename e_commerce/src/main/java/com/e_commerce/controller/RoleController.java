@@ -60,4 +60,41 @@ public class RoleController {
                        .body(new ErrorResponseDTO("Role already exists."));
         }
     }
+
+    @DeleteMapping("{/id}")
+    public ResponseEntity<?> deleteRoleById(@PathVariable Long id) {
+        if(roleService.deleteById(id)) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                    .body(new SuccessResponseDTO("Delete role."));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponseDTO("Id '" + id + "' not found."));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateRoleById(@PathVariable Long id, @RequestBody Role role) {
+
+        Set<Permission> permissionSet = new HashSet<>();
+        for(Permission permission : role.getPermissionSet()) {
+            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
+        }
+
+        try {
+            role.setPermissionSet(permissionSet);
+            Role roleFound = roleService.updateById(id,role);
+
+            if(roleFound != null) {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new SuccessResponseDTO("Role update.", roleFound));
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponseDTO("Role '" + role.getRole() + "' not found."));
+
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ErrorResponseDTO("Role '" + role.getRole() + "' already exists."));
+        }
+
+    }
+
 }

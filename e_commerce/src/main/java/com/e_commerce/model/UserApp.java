@@ -29,7 +29,7 @@ public class UserApp {
     private String name;
 
     @Column(nullable = false, length = 100)
-    private String latName;
+    private String latsName;
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -75,8 +75,5 @@ public class UserApp {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
-
-
 
 }

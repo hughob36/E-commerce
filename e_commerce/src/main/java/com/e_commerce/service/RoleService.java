@@ -44,11 +44,11 @@ public class RoleService implements IRoleService{
     public Role updateById(Long id, Role role) {
 
         Role roleFound = roleRepository.findById(id).orElse(null);
-        if(role != null) {
+        if(roleFound != null) {
             roleFound.setRole(role.getRole());
             roleFound.setPermissionSet(role.getPermissionSet());
             return roleRepository.save(roleFound);
         }
-        return role;
+        return roleFound;
     }
 }
