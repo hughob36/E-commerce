@@ -49,6 +49,6 @@ public class PermissionService implements IPermissionService{
             permissionFound.setPermissionName(permission.getPermissionName());
             return permissionRepository.save(permissionFound);
         }
-        return null;
+        return permissionFound;
     }
 }

@@ -13,4 +13,5 @@ public interface IUserAppService {
     public UserApp save(UserApp userApp);
     public boolean deleteById(Long id);
     public UserApp updateById(Long id, UserApp userApp);
+    public String encriptPassword(String password);
 }

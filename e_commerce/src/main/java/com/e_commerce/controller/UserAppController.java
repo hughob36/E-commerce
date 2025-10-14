@@ -32,7 +32,7 @@ public class UserAppController {
         return ResponseEntity.ok(userAppList);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<UserApp> getUser(@PathVariable Long id) {
         return userAppService.findById(id)
                     .map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
@@ -40,6 +40,8 @@ public class UserAppController {
 
     @PostMapping
     public ResponseEntity<?> createUserApp(@RequestBody UserApp userApp) {
+
+        userApp.setPassword(userAppService.encriptPassword(userApp.getPassword()));
 
         Set<Role> roleSet = new HashSet<>();
         for (Role role : userApp.getRoleSet()) {
@@ -58,7 +60,7 @@ public class UserAppController {
         }
     }
 
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
 
         if(userAppService.deleteById(id)) {
@@ -67,6 +69,33 @@ public class UserAppController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponseDTO("User not fund."));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUserById(@PathVariable Long id, @RequestBody UserApp userApp) {
+
+        userApp.setPassword(userAppService.encriptPassword(userApp.getPassword()));
+
+        Set<Role> roleSet = new HashSet<>();
+        for(Role role : userApp.getRoleSet()) {
+            roleService.findById(role.getId()).ifPresent(roleSet::add);
+        }
+
+        try {
+            userApp.setRoleSet(roleSet);
+            UserApp newUserApp = userAppService.updateById(id,userApp);
+
+            if(newUserApp != null) {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new SuccessResponseDTO("User update.", newUserApp));
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponseDTO("User not found."));
+
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ErrorResponseDTO("User '" + userApp.getUsername() + "' alreadyExists."));
+        }
     }
 
 }

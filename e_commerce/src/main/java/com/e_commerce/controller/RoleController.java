@@ -61,7 +61,7 @@ public class RoleController {
         }
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRoleById(@PathVariable Long id) {
         if(roleService.deleteById(id)) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
