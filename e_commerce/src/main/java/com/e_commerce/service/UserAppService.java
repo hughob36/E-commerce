@@ -1,5 +1,6 @@
 package com.e_commerce.service;
 
+import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.model.UserApp;
 import com.e_commerce.repository.IUserAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ public class UserAppService implements IUserAppService{
 
     @Override
     public List<UserApp> findAll() {
-        return userAppRepository.findAll()
-                ;
+        return userAppRepository.findAll();
     }
 
     @Override
-    public Optional<UserApp> findById(Long id) {
-        return userAppRepository.findById(id);
+    public UserApp findById(Long id) {
+        return userAppRepository.findById(id)
+                 .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));
     }
 
     @Override

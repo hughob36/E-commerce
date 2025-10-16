@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface IUserAppService {
 
     public List<UserApp> findAll();
-    public Optional<UserApp> findById(Long id);
+    public UserApp findById(Long id);
     public UserApp save(UserApp userApp);
     public boolean deleteById(Long id);
     public UserApp updateById(Long id, UserApp userApp);
