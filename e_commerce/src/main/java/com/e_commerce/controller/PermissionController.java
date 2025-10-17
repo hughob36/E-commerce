@@ -4,6 +4,7 @@ import com.e_commerce.dto.ErrorResponseDTO;
 import com.e_commerce.dto.SuccessResponseDTO;
 import com.e_commerce.model.Permission;
 import com.e_commerce.service.IPermissionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/permission")
+@RequiredArgsConstructor
 public class PermissionController {
 
-    @Autowired
-    private IPermissionService permissionService;
+    private final IPermissionService permissionService;
 
     @GetMapping
     public ResponseEntity<List<Permission>> getAllPermission() {

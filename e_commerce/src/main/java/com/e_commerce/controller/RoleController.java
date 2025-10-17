@@ -6,6 +6,7 @@ import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.service.IPermissionService;
 import com.e_commerce.service.IRoleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -18,13 +19,11 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/role")
+@RequiredArgsConstructor
 public class RoleController {
 
-    @Autowired
-    private IRoleService roleService;
-
-    @Autowired
-    private IPermissionService permissionService;
+    private final IRoleService roleService;
+    private final IPermissionService permissionService;
 
     @GetMapping
     public ResponseEntity<List<Role>> getRole() {

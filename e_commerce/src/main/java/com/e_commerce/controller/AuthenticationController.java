@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 @Tag(name = "Autenticación", description = "Operaciones relacionadas con el login y registro de usuarios.")
 public class AuthenticationController {
 
-    @Autowired
-    private UserDetailsServiseImpl userDetailsServise;
+    private final UserDetailsServiseImpl userDetailsServise;
 
     @Operation(summary = "Inicio de sesión de usuarios",
             description = "Permite que un usuario registrado en la base de datos inicie sesión y obtenga su token de autenticación.")

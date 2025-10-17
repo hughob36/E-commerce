@@ -1,30 +1,26 @@
 package com.e_commerce.controller;
 
-import com.e_commerce.dto.ErrorResponseDTO;
+
 import com.e_commerce.dto.SuccessResponseDTO;
-import com.e_commerce.model.Role;
 import com.e_commerce.model.UserApp;
 import com.e_commerce.service.IRoleService;
 import com.e_commerce.service.IUserAppService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("/api/user")
+@RequiredArgsConstructor
 public class UserAppController {
 
-    @Autowired
-    private IUserAppService userAppService;
-
-    @Autowired
-    private IRoleService roleService;
+    private final IUserAppService userAppService;
+    private final IRoleService roleService;
 
     @GetMapping
     public ResponseEntity<List<UserApp>> getUsers() {
@@ -38,63 +34,21 @@ public class UserAppController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUserApp(@RequestBody UserApp userApp) {
-
-        userApp.setPassword(userAppService.encriptPassword(userApp.getPassword()));
-
-        Set<Role> roleSet = new HashSet<>();
-        for (Role role : userApp.getRoleSet()) {
-            roleService.findById(role.getId()).ifPresent(roleSet::add);
-        }
-
-        try {
-            userApp.setRoleSet(roleSet);
-            UserApp newUserApp = userAppService.save(userApp);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new SuccessResponseDTO("created user.", newUserApp));
-
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ErrorResponseDTO("Username already exists."));
-        }
+    public ResponseEntity<UserApp> createUserApp(@RequestBody UserApp userApp) {
+        UserApp newUserApp = userAppService.save(userApp);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUserApp);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
-
-        if(userAppService.deleteById(id)) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(new SuccessResponseDTO("Delete user."));
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponseDTO("User not fund."));
+    public ResponseEntity<SuccessResponseDTO> deleteUserById(@PathVariable Long id) {
+        userAppService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUserById(@PathVariable Long id, @RequestBody UserApp userApp) {
-
-        userApp.setPassword(userAppService.encriptPassword(userApp.getPassword()));
-
-        Set<Role> roleSet = new HashSet<>();
-        for(Role role : userApp.getRoleSet()) {
-            roleService.findById(role.getId()).ifPresent(roleSet::add);
-        }
-
-        try {
-            userApp.setRoleSet(roleSet);
-            UserApp newUserApp = userAppService.updateById(id,userApp);
-
-            if(newUserApp != null) {
-                return ResponseEntity.status(HttpStatus.OK)
-                        .body(new SuccessResponseDTO("User update.", newUserApp));
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorResponseDTO("User not found."));
-
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ErrorResponseDTO("User '" + userApp.getUsername() + "' alreadyExists."));
-        }
+    public ResponseEntity<UserApp> updateUserById(@PathVariable Long id, @RequestBody UserApp userApp) {
+        UserApp newUserApp = userAppService.updateById(id,userApp);
+        return ResponseEntity.ok(newUserApp);
     }
 
 }

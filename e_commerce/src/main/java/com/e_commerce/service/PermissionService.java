@@ -2,6 +2,7 @@ package com.e_commerce.service;
 
 import com.e_commerce.model.Permission;
 import com.e_commerce.repository.IPermissionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PermissionService implements IPermissionService{
 
-    @Autowired
-    private IPermissionRepository permissionRepository;
+    private final IPermissionRepository permissionRepository;
 
     @Override
     public List<Permission> findAll() {
