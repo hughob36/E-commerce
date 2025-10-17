@@ -33,10 +33,7 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Role> getRole(@PathVariable Long id) {
-        return roleService.findById(id)
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
-
+        return ResponseEntity.ok(roleService.findById(id));
     }
 
     @PostMapping

@@ -70,11 +70,11 @@ public class UserAppService implements IUserAppService{
         for(Role role : userApp.getRoleSet()) {
             roleService.findById(role.getId()).ifPresent(roleSet::add);
         }
+        userAppFound.setRoleSet(roleSet);
         userAppFound.setName(userApp.getName());
         userAppFound.setLatsName(userApp.getLatsName());
         userAppFound.setUsername(userApp.getUsername());
         userAppFound.setEmail(userApp.getEmail());
-        userAppFound.setRoleSet(userApp.getRoleSet());
         userAppFound.setPhone(userApp.getPhone());
         userAppFound.setAddress(userApp.getAddress());
         userAppFound.setCity(userApp.getCity());

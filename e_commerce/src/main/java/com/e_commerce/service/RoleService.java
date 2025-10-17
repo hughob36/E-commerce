@@ -1,5 +1,6 @@
 package com.e_commerce.service;
 
+import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.model.Role;
 import com.e_commerce.repository.IRoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class RoleService implements IRoleService{
     }
 
     @Override
-    public Optional<Role> findById(Long id) {
-        return roleRepository.findById(id);
+    public Role findById(Long id) {
+        return roleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));
     }
 
     @Override
