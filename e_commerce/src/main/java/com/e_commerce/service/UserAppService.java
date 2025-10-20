@@ -43,7 +43,7 @@ public class UserAppService implements IUserAppService{
         }
         Set<Role> roleSet = new HashSet<>();
         for(Role role : userApp.getRoleSet()) {
-            roleService.findById(role.getId()).ifPresent(roleSet::add);
+            roleService.findByIdOptional(role.getId()).ifPresent(roleSet::add);
         }
         userApp.setRoleSet(roleSet);
         return userAppRepository.save(userApp);
@@ -65,10 +65,9 @@ public class UserAppService implements IUserAppService{
         if(userApp.getPassword() != null && !userApp.getPassword().isEmpty()) {
             userAppFound.setPassword(passwordEncoder.encode(userApp.getPassword()));
         }
-
         Set<Role> roleSet = new HashSet<>();
         for(Role role : userApp.getRoleSet()) {
-            roleService.findById(role.getId()).ifPresent(roleSet::add);
+            roleService.findByIdOptional(role.getId()).ifPresent(roleSet::add);
         }
         userAppFound.setRoleSet(roleSet);
         userAppFound.setName(userApp.getName());

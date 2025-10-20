@@ -40,7 +40,7 @@ public class UserAppController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<SuccessResponseDTO> deleteUserById(@PathVariable Long id) {
+    public ResponseEntity deleteUserById(@PathVariable Long id) {
         userAppService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

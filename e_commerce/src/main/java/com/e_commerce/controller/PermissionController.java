@@ -28,50 +28,23 @@ public class PermissionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Permission> getPermission(@PathVariable Long id) {
-        return permissionService.findById(id)
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(permissionService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<?> createPermission(@RequestBody Permission permission) {
-
-        Permission newPermission = permissionService.save(permission);
-        if(newPermission != null) {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                     .body(new SuccessResponseDTO("Created Permission.", newPermission));
-        }
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                     .body(new ErrorResponseDTO("Permission not created."));
+    public ResponseEntity<Permission> createPermission(@RequestBody Permission permission) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(permissionService.save(permission));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletePermission(@PathVariable Long id) {
-
-        if(permissionService.deleteById(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorResponseDTO("Id '"+ id + "' was found."));
+    public ResponseEntity deletePermission(@PathVariable Long id) {
+        permissionService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePermissionById(@PathVariable Long id, @RequestBody Permission permission) {
-
-        try {
-            Permission newPermission = permissionService.updateById(id, permission);
-
-            if(newPermission != null) {
-                return ResponseEntity.ok(newPermission);
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorResponseDTO("Permission not found."));
-
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Permission '" + permission.getPermissionName() + "' already exists.");
-        }
+    public ResponseEntity<Permission> updatePermissionById(@PathVariable Long id, @RequestBody Permission permission) {
+        return ResponseEntity.ok(permissionService.updateById(id, permission));
     }
-
 
 }

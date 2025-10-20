@@ -32,10 +32,15 @@ public class RoleService implements IRoleService{
     }
 
     @Override
+    public Optional<Role> findByIdOptional(Long id) {
+        return roleRepository.findById(id);
+    }
+
+    @Override
     public Role save(Role role) {
         Set<Permission> permissionSet = new HashSet<>();
         for(Permission permission : role.getPermissionSet()) {
-            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
+            permissionService.findByIdOptional(permission.getId()).ifPresent(permissionSet::add);
         }
         role.setPermissionSet(permissionSet);
         return roleRepository.save(role);
@@ -54,7 +59,7 @@ public class RoleService implements IRoleService{
         Role roleFound = this.findById(id);
         Set<Permission> permissionSet = new HashSet<>();
         for(Permission permission : role.getPermissionSet()) {
-            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
+            permissionService.findByIdOptional(permission.getId()).ifPresent(permissionSet::add);
         }
         roleFound.setRole(role.getRole());
         roleFound.setPermissionSet(permissionSet);

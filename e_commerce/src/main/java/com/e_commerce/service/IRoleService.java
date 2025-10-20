@@ -9,6 +9,7 @@ public interface IRoleService {
 
     public List<Role> findAll();
     public Role findById(Long id);
+    public Optional<Role> findByIdOptional(Long id);
     public Role save(Role role);
     public void deleteById(Long id);
     public Role updateById(Long id, Role role);

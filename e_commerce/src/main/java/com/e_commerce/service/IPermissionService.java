@@ -9,8 +9,9 @@ import java.util.Optional;
 public interface IPermissionService {
 
     public List<Permission> findAll();
-    public Optional<Permission> findById(Long id);
+    public Permission findById(Long id);
+    public Optional<Permission> findByIdOptional(Long id);
     public Permission save(Permission permission);
-    public boolean deleteById(Long id);
+    public void deleteById(Long id);
     public Permission updateById(Long id, Permission permission);
 }

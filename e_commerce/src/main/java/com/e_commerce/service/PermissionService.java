@@ -1,9 +1,9 @@
 package com.e_commerce.service;
 
+import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.model.Permission;
 import com.e_commerce.repository.IPermissionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,35 +21,34 @@ public class PermissionService implements IPermissionService{
     }
 
     @Override
-    public Optional<Permission> findById(Long id) {
+    public Permission findById(Long id) {
+        return permissionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Id '" + id + "' not found."));
+    }
+
+    @Override
+    public Optional<Permission> findByIdOptional(Long id) {
         return permissionRepository.findById(id);
     }
 
     @Override
     public Permission save(Permission permission) {
+
         return permissionRepository.save(permission);
     }
 
     @Override
-    public boolean deleteById(Long id) {
-
-        Permission permission = permissionRepository.findById(id).orElse(null);
-        if(permission !=  null) {
-            permissionRepository.deleteById(id);
-            return true;
+    public void deleteById(Long id) {
+        if(permissionRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Id '" + id + "' not found.");
         }
-        return false;
+        permissionRepository.deleteById(id);
     }
 
     @Override
     public Permission updateById(Long id, Permission permission) {
-
-        Permission permissionFound = permissionRepository.findById(id).orElse(null);
-
-        if(permissionFound != null) {
-            permissionFound.setPermissionName(permission.getPermissionName());
-            return permissionRepository.save(permissionFound);
-        }
-        return permissionFound;
+        Permission permissionFound = this.findById(id);
+        permissionFound.setPermissionName(permission.getPermissionName());
+        return permissionRepository.save(permissionFound);
     }
 }
