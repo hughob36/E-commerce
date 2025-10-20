@@ -54,8 +54,12 @@ public class PermissionService implements IPermissionService{
     public PermissionResponseDTO updateById(Long id, PermissionRequestDTO permissionRequestDTO) {
         Permission permissionFound = permissionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id '" + id + "' not found."));
-        Permission permission = permissionMapper.toPermission(permissionRequestDTO);
-        permissionFound.setPermissionName(permission.getPermissionName());
-        return permissionMapper.toPermissionResponseDTO( permissionRepository.save(permissionFound));
+        /*Permission permission = permissionMapper.toPermission(permissionRequestDTO);
+        permissionFound.setPermissionName(permission.getPermissionName());*/
+
+        // 2. Usamos el nuevo método del mapper para actualizar la entidad encontrada.
+        permissionMapper.updatePermissionFromDto(permissionRequestDTO, permissionFound);
+        Permission updatePermission = permissionRepository.save(permissionFound);
+        return permissionMapper.toPermissionResponseDTO(updatePermission);
     }
 }
