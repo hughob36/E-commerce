@@ -1,12 +1,11 @@
 package com.e_commerce.controller;
 
-import com.e_commerce.dto.ErrorResponseDTO;
-import com.e_commerce.dto.SuccessResponseDTO;
-import com.e_commerce.model.Permission;
+
+import com.e_commerce.dto.PermissionRequestDTO;
+import com.e_commerce.dto.PermissionResponseDTO;
 import com.e_commerce.service.IPermissionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,18 +20,17 @@ public class PermissionController {
     private final IPermissionService permissionService;
 
     @GetMapping
-    public ResponseEntity<List<Permission>> getAllPermission() {
-        List<Permission> permissionList = permissionService.findAll();
-        return ResponseEntity.ok(permissionList);
+    public ResponseEntity<List<PermissionResponseDTO>> getAllPermission() {
+        return ResponseEntity.ok(permissionService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Permission> getPermission(@PathVariable Long id) {
+    public ResponseEntity<PermissionResponseDTO> getPermission(@PathVariable Long id) {
         return ResponseEntity.ok(permissionService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Permission> createPermission(@RequestBody Permission permission) {
+    public ResponseEntity<PermissionResponseDTO> createPermission(@RequestBody @Valid PermissionRequestDTO permission) {
         return ResponseEntity.status(HttpStatus.CREATED).body(permissionService.save(permission));
     }
 
@@ -43,7 +41,7 @@ public class PermissionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Permission> updatePermissionById(@PathVariable Long id, @RequestBody Permission permission) {
+    public ResponseEntity<PermissionResponseDTO> updatePermissionById(@PathVariable Long id, @RequestBody @Valid PermissionRequestDTO permission) {
         return ResponseEntity.ok(permissionService.updateById(id, permission));
     }
 
