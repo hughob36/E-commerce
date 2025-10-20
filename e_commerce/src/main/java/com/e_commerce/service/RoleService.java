@@ -1,20 +1,24 @@
 package com.e_commerce.service;
 
 import com.e_commerce.exception.ResourceNotFoundException;
+import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.repository.IRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class RoleService implements IRoleService{
 
     private final IRoleRepository roleRepository;
+    private final IPermissionService permissionService;
 
     @Override
     public List<Role> findAll() {
@@ -29,29 +33,31 @@ public class RoleService implements IRoleService{
 
     @Override
     public Role save(Role role) {
+        Set<Permission> permissionSet = new HashSet<>();
+        for(Permission permission : role.getPermissionSet()) {
+            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
+        }
+        role.setPermissionSet(permissionSet);
         return roleRepository.save(role);
     }
 
     @Override
-    public boolean deleteById(Long id) {
-
-        Role role = roleRepository.findById(id).orElse(null);
-        if(role != null) {
-            roleRepository.deleteById(id);
-            return true;
+    public void deleteById(Long id) {
+        if(!roleRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Id '" + id + "' not found.");
         }
-        return false;
+        roleRepository.deleteById(id);
     }
 
     @Override
     public Role updateById(Long id, Role role) {
-
-        Role roleFound = roleRepository.findById(id).orElse(null);
-        if(roleFound != null) {
-            roleFound.setRole(role.getRole());
-            roleFound.setPermissionSet(role.getPermissionSet());
-            return roleRepository.save(roleFound);
+        Role roleFound = this.findById(id);
+        Set<Permission> permissionSet = new HashSet<>();
+        for(Permission permission : role.getPermissionSet()) {
+            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
         }
-        return roleFound;
+        roleFound.setRole(role.getRole());
+        roleFound.setPermissionSet(permissionSet);
+        return roleRepository.save(roleFound);
     }
 }

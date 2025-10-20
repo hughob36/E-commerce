@@ -37,60 +37,19 @@ public class RoleController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createRole(@RequestBody Role role) {
-
-        Set<Permission> permissionSet = new HashSet<>();
-
-        for(Permission permission : role.getPermissionSet()) {
-            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
-        }
-
-        try {
-            role.setPermissionSet(permissionSet);
-            Role newRole = roleService.save(role);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                        .body(new SuccessResponseDTO("Role created.", newRole));
-
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                       .body(new ErrorResponseDTO("Role already exists."));
-        }
+    public ResponseEntity<Role> createRole(@RequestBody Role role) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(roleService.save(role));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRoleById(@PathVariable Long id) {
-        if(roleService.deleteById(id)) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(new SuccessResponseDTO("Delete role."));
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponseDTO("Id '" + id + "' not found."));
+        roleService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRoleById(@PathVariable Long id, @RequestBody Role role) {
-
-        Set<Permission> permissionSet = new HashSet<>();
-        for(Permission permission : role.getPermissionSet()) {
-            permissionService.findById(permission.getId()).ifPresent(permissionSet::add);
-        }
-
-        try {
-            role.setPermissionSet(permissionSet);
-            Role roleFound = roleService.updateById(id,role);
-
-            if(roleFound != null) {
-                return ResponseEntity.status(HttpStatus.OK)
-                        .body(new SuccessResponseDTO("Role update.", roleFound));
-            }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorResponseDTO("Role '" + role.getRole() + "' not found."));
-
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(new ErrorResponseDTO("Role '" + role.getRole() + "' already exists."));
-        }
-
+    public ResponseEntity<Role> updateRoleById(@PathVariable Long id, @RequestBody Role role) {
+        return ResponseEntity.status(HttpStatus.OK).body(roleService.updateById(id,role));
     }
 
 }
