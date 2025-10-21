@@ -81,13 +81,12 @@ public class UserDetailsServiseImpl implements UserDetailsService {
 
         UserDetails userDetails = this.loadUserByUsername(username);
 
-        if(userDetails == null) {
-            throw new BadCredentialsException("Invalid username or password.");
-        }
         if(!passwordEncoder.matches(password,userDetails.getPassword())) {
             throw new BadCredentialsException("Invalid username or password.");
         }
-        return new UsernamePasswordAuthenticationToken(username,
-                        userDetails.getPassword(),userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(
+                username,
+                userDetails.getPassword(),
+                userDetails.getAuthorities());
     }
 }
