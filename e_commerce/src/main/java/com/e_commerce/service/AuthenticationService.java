@@ -12,11 +12,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationService implements IAuthenticationService{
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    @Override
     public AuthResponseDTO loginUser(AuthLoginRequestDTO authLoginRequestDTO) {
 
         String username = authLoginRequestDTO.username();

@@ -3,6 +3,7 @@ package com.e_commerce.controller;
 import com.e_commerce.dto.AuthLoginRequestDTO;
 import com.e_commerce.dto.AuthResponseDTO;
 import com.e_commerce.service.AuthenticationService;
+import com.e_commerce.service.IAuthenticationService;
 import com.e_commerce.service.UserDetailsServiseImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Autenticación", description = "Operaciones relacionadas con el login y registro de usuarios.")
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
+    private final IAuthenticationService authenticationService;
 
     @Operation(summary = "Inicio de sesión de usuarios",
             description = "Permite que un usuario registrado en la base de datos inicie sesión y obtenga su token de autenticación.")
