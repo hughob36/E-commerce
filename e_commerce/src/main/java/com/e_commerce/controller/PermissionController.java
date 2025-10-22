@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,16 +16,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/permission")
 @RequiredArgsConstructor
+@PreAuthorize("denyAll()")
 public class PermissionController {
 
     private final IPermissionService permissionService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<PermissionResponseDTO>> getAllPermission() {
         return ResponseEntity.ok(permissionService.findAll());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<PermissionResponseDTO> getPermission(@PathVariable Long id) {
         return ResponseEntity.ok(permissionService.findById(id));
     }
