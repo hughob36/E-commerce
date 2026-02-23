@@ -96,7 +96,7 @@
 
 	<build>
 		<plugins>
-			<!-- REEMPLACE SU PLUGIN DE MAVEN COMPILER POR ESTE BLOQUE COMPLETO -->
+			<!-- PLUGIN DE MAVEN COMPILER POR ESTE BLOQUE COMPLETO -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

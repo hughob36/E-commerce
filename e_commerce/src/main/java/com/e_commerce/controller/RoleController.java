@@ -1,6 +1,7 @@
 package com.e_commerce.controller;
 
 
+import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.model.Role;
 
 import com.e_commerce.service.IRoleService;
@@ -21,13 +22,12 @@ public class RoleController {
     private final IRoleService roleService;
 
     @GetMapping
-    public ResponseEntity<List<Role>> getRole() {
-        List<Role> roleList = roleService.findAll();
-        return ResponseEntity.ok(roleList);
+    public ResponseEntity<List<RoleResponseDTO>> getRole() {
+        return ResponseEntity.ok(roleService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Role> getRole(@PathVariable Long id) {
+    public ResponseEntity<RoleResponseDTO> getRole(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.findById(id));
     }
 

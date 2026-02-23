@@ -31,6 +31,6 @@ public class AuthenticationService implements IAuthenticationService{
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtil.createToken(authentication);
 
-        return new AuthResponseDTO(username,"Login successfull.",token,true);
+        return new AuthResponseDTO(username,"Login successful.",token,true);
     }
 }

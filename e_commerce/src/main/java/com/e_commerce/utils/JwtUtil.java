@@ -1,6 +1,5 @@
 package com.e_commerce.utils;
 
-import ch.qos.logback.core.net.server.Client;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
