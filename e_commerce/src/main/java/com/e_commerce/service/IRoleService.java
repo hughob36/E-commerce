@@ -1,5 +1,6 @@
 package com.e_commerce.service;
 
+import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.model.Role;
 
@@ -11,8 +12,8 @@ public interface IRoleService {
     public List<RoleResponseDTO> findAll();
     public RoleResponseDTO findById(Long id);
     public Optional<Role> findByIdOptional(Long id);
-    public Role save(Role role);
+    public RoleResponseDTO save(RoleRequestDTO roleRequestDTO);
     public void deleteById(Long id);
-    public Role updateById(Long id, Role role);
+    public RoleResponseDTO updateById(Long id, RoleRequestDTO roleRequestDTO);
 
 }

@@ -1,6 +1,7 @@
 package com.e_commerce.controller;
 
 
+import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.model.Role;
 
@@ -32,7 +33,7 @@ public class RoleController {
     }
 
     @PostMapping
-    public ResponseEntity<Role> createRole(@RequestBody Role role) {
+    public ResponseEntity<RoleResponseDTO> createRole(@RequestBody RoleRequestDTO role) {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.save(role));
     }
 
@@ -43,8 +44,8 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Role> updateRoleById(@PathVariable Long id, @RequestBody Role role) {
-        return ResponseEntity.status(HttpStatus.OK).body(roleService.updateById(id,role));
+    public ResponseEntity<RoleResponseDTO> updateRoleById(@PathVariable Long id, @RequestBody RoleRequestDTO roleRequestDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(roleService.updateById(id,roleRequestDTO));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.e_commerce.service;
 
+import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.IRoleMapper;
@@ -41,13 +42,14 @@ public class RoleService implements IRoleService{
     }
 
     @Override
-    public Role save(Role role) {
+    public RoleResponseDTO save(RoleRequestDTO roleRequestDTO) {
+        Role role = roleMapper.toRole(roleRequestDTO);
         Set<Permission> permissionSet = new HashSet<>();
         for(Permission permission : role.getPermissionSet()) {
             permissionService.findByIdOptional(permission.getId()).ifPresent(permissionSet::add);
         }
         role.setPermissionSet(permissionSet);
-        return roleRepository.save(role);
+        return roleMapper.toRoleResponseDTO(roleRepository.save(role));
     }
 
     @Override
@@ -59,15 +61,15 @@ public class RoleService implements IRoleService{
     }
 
     @Override
-    public Role updateById(Long id, Role role) {
+    public RoleResponseDTO updateById(Long id, RoleRequestDTO roleRequestDTO) {
         Role roleFound = roleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));;
+                .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));
+
         Set<Permission> permissionSet = new HashSet<>();
-        for(Permission permission : role.getPermissionSet()) {
+        for(Permission permission : roleRequestDTO.getPermissionSet()) {
             permissionService.findByIdOptional(permission.getId()).ifPresent(permissionSet::add);
         }
-        roleFound.setRole(role.getRole());
-        roleFound.setPermissionSet(permissionSet);
-        return roleRepository.save(roleFound);
+        roleMapper.updateRoleFromDTO(roleRequestDTO,roleFound);
+        return roleMapper.toRoleResponseDTO(roleRepository.save(roleFound));
     }
 }
