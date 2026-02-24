@@ -1,10 +1,9 @@
 package com.e_commerce.controller;
 
 
-import com.e_commerce.dto.SuccessResponseDTO;
 import com.e_commerce.dto.UserAppRequestDTO;
 import com.e_commerce.dto.UserAppResponseDTO;
-import com.e_commerce.model.UserApp;
+
 import com.e_commerce.service.IRoleService;
 import com.e_commerce.service.IUserAppService;
 import jakarta.validation.Valid;
@@ -36,7 +35,7 @@ public class UserAppController {
     }
 
     @PostMapping
-    public ResponseEntity<UserAppResponseDTO> createUserApp(@RequestBody  UserAppRequestDTO userAppRequestDTO) {
+    public ResponseEntity<UserAppResponseDTO> createUserApp(@RequestBody  @Valid UserAppRequestDTO userAppRequestDTO) {
         UserAppResponseDTO newUserApp = userAppService.save(userAppRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUserApp);
     }
@@ -48,7 +47,7 @@ public class UserAppController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserAppResponseDTO> updateUserById(@PathVariable Long id, @RequestBody UserAppRequestDTO userAppRequestDTO) {
+    public ResponseEntity<UserAppResponseDTO> updateUserById(@PathVariable Long id, @RequestBody @Valid UserAppRequestDTO userAppRequestDTO) {
         UserAppResponseDTO newUserApp = userAppService.updateById(id,userAppRequestDTO);
         return ResponseEntity.ok(newUserApp);
     }
