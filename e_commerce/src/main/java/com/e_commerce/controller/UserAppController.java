@@ -2,10 +2,12 @@ package com.e_commerce.controller;
 
 
 import com.e_commerce.dto.SuccessResponseDTO;
+import com.e_commerce.dto.UserAppRequestDTO;
 import com.e_commerce.dto.UserAppResponseDTO;
 import com.e_commerce.model.UserApp;
 import com.e_commerce.service.IRoleService;
 import com.e_commerce.service.IUserAppService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +31,13 @@ public class UserAppController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserApp> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserAppResponseDTO> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userAppService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserApp> createUserApp(@RequestBody UserApp userApp) {
-        UserApp newUserApp = userAppService.save(userApp);
+    public ResponseEntity<UserAppResponseDTO> createUserApp(@RequestBody  UserAppRequestDTO userAppRequestDTO) {
+        UserAppResponseDTO newUserApp = userAppService.save(userAppRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUserApp);
     }
 
@@ -46,8 +48,8 @@ public class UserAppController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserApp> updateUserById(@PathVariable Long id, @RequestBody UserApp userApp) {
-        UserApp newUserApp = userAppService.updateById(id,userApp);
+    public ResponseEntity<UserAppResponseDTO> updateUserById(@PathVariable Long id, @RequestBody UserAppRequestDTO userAppRequestDTO) {
+        UserAppResponseDTO newUserApp = userAppService.updateById(id,userAppRequestDTO);
         return ResponseEntity.ok(newUserApp);
     }
 

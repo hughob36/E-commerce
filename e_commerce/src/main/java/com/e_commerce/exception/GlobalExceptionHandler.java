@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Collections;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -18,10 +20,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
+    /*@ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseDTO> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         ErrorResponseDTO errorResponse = new ErrorResponseDTO("The resource already exists or cannot be created/updated.");
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }*/
+
+    @ExceptionHandler(DataIntegrityViolationException.class)//me dio el error exacto-tenia que reconstruir el proyecto
+    public ResponseEntity<?> handleDataIntegrity(DataIntegrityViolationException e) {
+        // Esto te imprimirá en el JSON de respuesta el error real de SQL
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap("error_detalle", e.getRootCause().getMessage()));
     }
 
     @ExceptionHandler(BadCredentialsException.class)

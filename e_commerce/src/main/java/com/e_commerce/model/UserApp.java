@@ -29,7 +29,7 @@ public class UserApp {
     private String name;
 
     @Column(nullable = false, length = 100)
-    private String latsName;
+    private String lastName;
 
     @Column(unique = true, nullable = false)
     private String username;
