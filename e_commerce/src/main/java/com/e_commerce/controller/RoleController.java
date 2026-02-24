@@ -3,7 +3,6 @@ package com.e_commerce.controller;
 
 import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
-import com.e_commerce.model.Role;
 
 import com.e_commerce.service.IRoleService;
 import lombok.RequiredArgsConstructor;

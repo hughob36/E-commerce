@@ -2,6 +2,7 @@ package com.e_commerce.controller;
 
 
 import com.e_commerce.dto.SuccessResponseDTO;
+import com.e_commerce.dto.UserAppResponseDTO;
 import com.e_commerce.model.UserApp;
 import com.e_commerce.service.IRoleService;
 import com.e_commerce.service.IUserAppService;
@@ -23,9 +24,8 @@ public class UserAppController {
     private final IRoleService roleService;
 
     @GetMapping
-    public ResponseEntity<List<UserApp>> getUsers() {
-        List<UserApp> userAppList = userAppService.findAll();
-        return ResponseEntity.ok(userAppList);
+    public ResponseEntity<List<UserAppResponseDTO>> getUsers() {
+        return ResponseEntity.ok(userAppService.findAll());
     }
 
     @GetMapping("/{id}")

@@ -1,19 +1,17 @@
 package com.e_commerce.service;
 
+import com.e_commerce.dto.UserAppResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
+import com.e_commerce.mapper.IUserAppMapper;
 import com.e_commerce.model.Role;
 import com.e_commerce.model.UserApp;
 import com.e_commerce.repository.IUserAppRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -23,10 +21,11 @@ public class UserAppService implements IUserAppService{
     private final IUserAppRepository userAppRepository;
     private final IRoleService roleService;
     private final PasswordEncoder passwordEncoder;
+    private final IUserAppMapper userAppMapper;
 
     @Override
-    public List<UserApp> findAll() {
-        return userAppRepository.findAll();
+    public List<UserAppResponseDTO> findAll() {
+        return userAppMapper.toUserAppResponseDTOList(userAppRepository.findAll());
     }
 
     @Override
