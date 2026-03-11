@@ -32,7 +32,7 @@ public class RoleService implements IRoleService{
     @Override
     public RoleResponseDTO findById(Long id) {
         Role role = roleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Role '"+ id +"' not found."));
         return roleMapper.toRoleResponseDTO(role);
     }
 
