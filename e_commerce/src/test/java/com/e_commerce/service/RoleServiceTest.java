@@ -1,6 +1,8 @@
 package com.e_commerce.service;
 
 
+import com.e_commerce.dto.PermissionRequestDTO;
+import com.e_commerce.dto.PermissionResponseDTO;
 import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
@@ -175,10 +177,8 @@ public class RoleServiceTest {
         // 1. Arrange (Preparar datos)
         RoleRequestDTO requestDTO = new RoleRequestDTO("ADM", new HashSet<>());
         Role roleToSave = new Role(null, "ADM", new HashSet<>());
-
         // Mockeamos el mapeo inicial
         when(roleMapper.toRole(requestDTO)).thenReturn(roleToSave);
-
         // Simulamos que el repositorio lanza la excepción de integridad (ej: Unique Constraint Violated)
         when(roleRepository.save(any(Role.class)))
                 .thenThrow(new DataIntegrityViolationException("Duplicate entry 'ADM' for key 'roles.role'"));
@@ -195,11 +195,84 @@ public class RoleServiceTest {
         verify(roleMapper, never()).toRoleResponseDTO(any());
     }
 
+    @Test
+    @DisplayName("Should delete a role when ID exists")
+    public void deleteById_ShouldDeleteRole_WhenIdExists() {
+        Long id = 1L;
+        when(roleRepository.existsById(id)).thenReturn(true);
 
+        roleService.deleteById(id);
 
+        verify(roleRepository, times(1)).existsById(id);
+        verify(roleRepository, times(1)).deleteById(id);
+    }
 
+    @Test
+    @DisplayName("Should throw ResourceNotFoundException when deleting non-existent ID")
+    public void deleteById_ShouldThrowException_WhenIdDoesNotExist() {
+        Long id = 1L;
+        when(roleRepository.existsById(id)).thenReturn(false);
 
+        assertThrows(ResourceNotFoundException.class, () -> roleService.deleteById(id));
 
+        verify(roleRepository, times(1)).existsById(id);
+        verify(roleRepository, never()).deleteById(anyLong());
+    }
 
+    @Test
+    @DisplayName("Should update and return DTO when ID exists")
+    public void updateById_ShouldReturnUpdatedDTO_WhenIdExists() {
+        Long id = 1L;
+        RoleRequestDTO requestDTO = new RoleRequestDTO("NEW_NAME", new HashSet<>());
+        Role existingRole = new Role(id,"OLD_NAME",new HashSet<>());
+        Role updatedRole = new Role(id,"NEW_NAME",new HashSet<>());
+        RoleResponseDTO expectedResponse = new RoleResponseDTO(id, "NEW_NAME", new HashSet<>());
+
+        // Configuración de los Mocks (DEBE IR ANTES DEL ACT)
+        when(roleRepository.findById(id)).thenReturn(Optional.of(existingRole));
+        // El mapper suele ser un void o actualiza la referencia, doNothing() es correcto para métodos void
+        doNothing().when(roleMapper).updateRoleFromDTO(requestDTO, existingRole);
+        when(roleRepository.save(existingRole)).thenReturn(updatedRole);
+        when(roleMapper.toRoleResponseDTO(updatedRole)).thenReturn(expectedResponse);
+
+        // 2. ACT
+        RoleResponseDTO result = roleService.updateById(id, requestDTO);
+
+        // 3. ASSERT
+        assertAll("Verify role update results",
+                () -> assertNotNull(result, "The result should not be null"),
+                () -> assertEquals(expectedResponse.getRole(), result.getRole(), "The role name should match the updated value"),
+                () -> assertEquals(id, result.getId(), "The ID should remain the same")
+        );
+        verify(roleRepository, times(1)).findById(id);
+        verify(roleMapper, times(1)).updateRoleFromDTO(requestDTO, existingRole);
+        verify(roleRepository, times(1)).save(existingRole);
+        verifyNoMoreInteractions(roleRepository, roleMapper, permissionService);
+    }
+
+    @Test
+    @DisplayName("Should throw ResourceNotFoundException when ID does not exist")
+    public void updateById_ShouldThrowException_WhenIdDoesNotExist() {
+        // 1. GIVEN
+        Long id = 99L;
+        RoleRequestDTO requestDTO = new RoleRequestDTO("ADMIN", new HashSet<>());
+
+        when(roleRepository.findById(id)).thenReturn(Optional.empty());
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
+            roleService.updateById(id, requestDTO);
+        });
+
+        assertEquals("User '" + id + "' not found.", exception.getMessage());
+
+        verify(roleRepository, times(1)).findById(id);
+
+        // Crucial: Ensure these methods were NEVER called
+        verify(permissionService, never()).findByIdOptional(anyLong());
+        verify(roleMapper, never()).updateRoleFromDTO(any(), any());
+        verify(roleRepository, never()).save(any());
+
+        verifyNoMoreInteractions(roleRepository, roleMapper, permissionService);
+    }
 
 }
