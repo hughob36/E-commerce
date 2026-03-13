@@ -51,4 +51,14 @@ public class GlobalExceptionHandler {
         ErrorResponseDTO errorResponse = new ErrorResponseDTO("An unexpected error occurred on the server.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
+
+    //esto agrege investigar
+    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponseDTO> handleValidationException(org.springframework.web.bind.MethodArgumentNotValidException ex) {
+        // Obtenemos el primer mensaje de error de las anotaciones (@NotBlank, etc.)
+        String errorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(errorMessage);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
 }
