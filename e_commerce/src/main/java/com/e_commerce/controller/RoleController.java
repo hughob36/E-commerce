@@ -5,6 +5,7 @@ import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
 
 import com.e_commerce.service.IRoleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class RoleController {
     }
 
     @PostMapping
-    public ResponseEntity<RoleResponseDTO> createRole(@RequestBody RoleRequestDTO role) {
+    public ResponseEntity<RoleResponseDTO> createRole(@RequestBody @Valid RoleRequestDTO role) {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.save(role));
     }
 
@@ -43,7 +44,7 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RoleResponseDTO> updateRoleById(@PathVariable Long id, @RequestBody RoleRequestDTO roleRequestDTO) {
+    public ResponseEntity<RoleResponseDTO> updateRoleById(@PathVariable Long id, @RequestBody @Valid RoleRequestDTO roleRequestDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(roleService.updateById(id,roleRequestDTO));
     }
 

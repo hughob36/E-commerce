@@ -63,7 +63,7 @@ public class RoleService implements IRoleService{
     @Override
     public RoleResponseDTO updateById(Long id, RoleRequestDTO roleRequestDTO) {
         Role roleFound = roleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Role '"+ id +"' not found."));
 
         Set<Permission> permissionSet = new HashSet<>();
         for(Permission permission : roleRequestDTO.getPermissionSet()) {
