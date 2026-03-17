@@ -253,7 +253,7 @@ public class RoleServiceTest {
     @Test
     @DisplayName("Should throw ResourceNotFoundException when ID does not exist")
     public void updateById_ShouldThrowException_WhenIdDoesNotExist() {
-        // 1. GIVEN
+
         Long id = 99L;
         RoleRequestDTO requestDTO = new RoleRequestDTO("ADMIN", new HashSet<>());
 
@@ -263,11 +263,10 @@ public class RoleServiceTest {
             roleService.updateById(id, requestDTO);
         });
 
-        assertEquals("User '" + id + "' not found.", exception.getMessage());
+        assertEquals("Role '" + id + "' not found.", exception.getMessage());
 
         verify(roleRepository, times(1)).findById(id);
 
-        // Crucial: Ensure these methods were NEVER called
         verify(permissionService, never()).findByIdOptional(anyLong());
         verify(roleMapper, never()).updateRoleFromDTO(any(), any());
         verify(roleRepository, never()).save(any());
