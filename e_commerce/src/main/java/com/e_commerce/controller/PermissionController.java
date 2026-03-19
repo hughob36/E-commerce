@@ -16,37 +16,41 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/permission")
 @RequiredArgsConstructor
-//@PreAuthorize("denyAll()")
+@PreAuthorize("denyAll()")
 public class PermissionController {
 
     private final IPermissionService permissionService;
 
     @GetMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<PermissionResponseDTO>> getAllPermission() {
         return ResponseEntity.ok(permissionService.findAll());
     }
 
     @GetMapping("/{id}")
-    //@PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('USER') or hasRole('ADM')")
     public ResponseEntity<PermissionResponseDTO> getPermission(@PathVariable Long id) {
         return ResponseEntity.ok(permissionService.findById(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PermissionResponseDTO> createPermission(@RequestBody @Valid PermissionRequestDTO permission) {
         return ResponseEntity.status(HttpStatus.CREATED).body(permissionService.save(permission));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deletePermission(@PathVariable Long id) {
         permissionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PermissionResponseDTO> updatePermissionById(@PathVariable Long id, @RequestBody @Valid PermissionRequestDTO permission) {
         return ResponseEntity.ok(permissionService.updateById(id, permission));
     }
+
 
 }
