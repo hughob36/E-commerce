@@ -73,7 +73,7 @@ public class PermissionControllerIntTest {
 
     @Test
     @DisplayName("GET /api/permission/{id} - Should allow access to ADMIN role")
-    @WithMockUser(roles = {"ADM"})
+    @WithMockUser(roles = {"ADMIN"})
     public void getPermissionById_AdminSuccess() throws Exception {
         // 1. Arrange
         Permission permission = new Permission();
@@ -102,7 +102,7 @@ public class PermissionControllerIntTest {
     }
 
     @Test
-    @DisplayName("GET /api/permission/{id} - Should return 403 for roles other than USER or ADM")
+    @DisplayName("GET /api/permission/{id} - Should return 403 for roles other than USER or ADMIN")
     @WithMockUser(roles = {"GUEST"})
     public void getPermissionById_ForbiddenForGuest() throws Exception {
         mockMvc.perform(get("/api/permission/1"))

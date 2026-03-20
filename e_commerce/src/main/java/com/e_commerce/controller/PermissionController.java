@@ -28,7 +28,7 @@ public class PermissionController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADM')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<PermissionResponseDTO> getPermission(@PathVariable Long id) {
         return ResponseEntity.ok(permissionService.findById(id));
     }
