@@ -1,5 +1,7 @@
 package com.e_commerce.controller;
 
+import com.e_commerce.dto.PermissionRequestDTO;
+import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.repository.IPermissionRepository;
@@ -14,15 +16,14 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -191,6 +192,116 @@ public class RoleControllerIntTest {
         assertThat(count).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("POST /api/role - Should return 403 Forbidden for non-admin users")
+    @WithMockUser(roles = {"USER"})
+    public void save_Role_Forbidden() throws Exception {
 
+        Permission permission = new Permission();
+        permission.setPermissionName("READ_PRIVILEGE3");
+        permissionRepository.save(permission);
+
+        Role role = new Role();
+        role.setRole("DELETE");
+        Set<Permission> permissionSet = new HashSet<>();
+        permissionSet.add(permission);
+        role.setPermissionSet(permissionSet);
+
+        mockMvc.perform(post("/api/role")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(role)))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @DisplayName("DELETE /api/role/{id} - Should delete role and return 204")
+    @WithMockUser(roles = {"ADMIN"})
+    public void deleteRole_Success() throws Exception {
+
+        Permission permission = new Permission();
+        permission.setPermissionName("READ_PRIVILEGE4");
+        permissionRepository.save(permission);
+
+        Role role = new Role();
+        Set<Permission> permissionSet = new HashSet<>();
+        permissionSet.add(permission);
+        role.setPermissionSet(permissionSet);
+        role.setRole("TEMP_ROLE");
+        Role saved = roleRepository.save(role);
+        Long idToDelete = saved.getId();
+
+        // 2. Act: Llamamos al endpoint de borrado
+        mockMvc.perform(delete("/api/role/{id}", idToDelete))
+                .andExpect(status().isNoContent());
+
+        // 3. Assert: Verificamos que realmente desapareció de la DB
+        boolean exists = roleRepository.existsById(idToDelete);
+        assertThat(exists).isFalse();
+    }
+
+    @Test
+    @DisplayName("DELETE /api/role/{id} - Should return 404 when id does not exist")
+    @WithMockUser(roles = {"ADMIN"})
+    public void deleteRole_NotFound() throws Exception {
+        Long nonExistentId = 999L;
+        // Act & Assert
+        mockMvc.perform(delete("/api/permission/{id}", nonExistentId))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("PUT /api/role/{id} - Should update role name successfully")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updatePermission_Success() throws Exception {
+
+        Permission permission = new Permission();
+        permission.setPermissionName("READ_PRIVILEGE5");
+        permissionRepository.save(permission);
+
+        Role original = new Role();
+        Set<Permission> permissionSet = new HashSet<>();
+        permissionSet.add(permission);
+        original.setPermissionSet(permissionSet);
+        original.setRole("OLD_NAME");
+        Role saved = roleRepository.save(original);
+        Long id = saved.getId();
+
+        // Preparamos el DTO con el nuevo dato
+        RoleRequestDTO updateRequest = new RoleRequestDTO();
+        updateRequest.setRole("NEW_NAME");
+        updateRequest.setPermissionSet(permissionSet);
+
+        // 2. Act & Assert
+        mockMvc.perform(put("/api/role/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.role").value("NEW_NAME"));
+
+        // 3. Verificación extra en la DB
+        Role updatedInDb = roleRepository.findById(id).get();
+        assertThat(updatedInDb.getRole()).isEqualTo("NEW_NAME");
+    }
+
+    @Test
+    @DisplayName("PUT /api/role/{id} - Should return 404 when trying to update non-existent id")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updatePermission_NotFound() throws Exception {
+
+        Permission permission = new Permission();
+        permission.setPermissionName("READ_PRIVILEGE6");
+        permissionRepository.save(permission);
+
+        RoleRequestDTO updateRequest = new RoleRequestDTO();
+        Set<Permission> permissionSet = new HashSet<>();
+        permissionSet.add(permission);
+        updateRequest.setRole("ANY_NAME");
+        updateRequest.setPermissionSet(permissionSet);
+
+        mockMvc.perform(put("/api/role/{id}", 9999L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isNotFound());
+    }
 
 }

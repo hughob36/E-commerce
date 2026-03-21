@@ -43,12 +43,14 @@ public class RoleController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteRoleById(@PathVariable Long id) {
         roleService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<RoleResponseDTO> updateRoleById(@PathVariable Long id, @RequestBody @Valid RoleRequestDTO roleRequestDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(roleService.updateById(id,roleRequestDTO));
     }
