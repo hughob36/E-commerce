@@ -1,8 +1,7 @@
 package com.e_commerce.service;
 
 
-import com.e_commerce.dto.PermissionRequestDTO;
-import com.e_commerce.dto.PermissionResponseDTO;
+
 import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
