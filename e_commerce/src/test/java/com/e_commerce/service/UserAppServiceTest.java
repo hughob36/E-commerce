@@ -1,13 +1,12 @@
 package com.e_commerce.service;
 
 
+
 import com.e_commerce.dto.RoleRequestDTO;
-import com.e_commerce.dto.RoleResponseDTO;
 import com.e_commerce.dto.UserAppRequestDTO;
 import com.e_commerce.dto.UserAppResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.IUserAppMapper;
-import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.model.UserApp;
 import com.e_commerce.repository.IUserAppRepository;
@@ -19,6 +18,7 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -229,11 +229,167 @@ public class UserAppServiceTest {
         // --- Assert ---
         verify(userAppRepository).save(argumentCaptor.capture());
         UserApp captured = argumentCaptor.getValue();
-
     }
 
+    @Test
+    @DisplayName("Should throw DataIntegrityViolationException when userApp name already exists")
+    public void save_ShouldThrowException_WhenRoleNameExists() {
 
+        String rawPassword = "secret";
+        String encodedPassword = "encoded_secret";
 
+        Role role = new Role(10L, "ADMIN", new HashSet<>());
+        Set<Role> roleSet = new HashSet<>(Collections.singletonList(role));
 
+        UserAppRequestDTO requestDTO = UserAppRequestDTO.builder()
+                .username("jperez")
+                .password(rawPassword)
+                .roleSet(roleSet)
+                .build();
+
+        UserApp entityFromMapper = new UserApp();
+        entityFromMapper.setUsername("jperez");
+        entityFromMapper.setPassword(rawPassword);
+
+        when(passwordEncoder.encode(requestDTO.getPassword())).thenReturn(encodedPassword);
+
+        when(userAppMapper.toUserApp(requestDTO)).thenReturn(entityFromMapper);
+
+        when(userAppRepository.save(any(UserApp.class)))
+                .thenThrow(new DataIntegrityViolationException("Duplicate entry 'ADM' for key 'Users.username'"));
+
+        assertThrows(DataIntegrityViolationException.class, () -> {
+            userAppService.save(requestDTO);
+        });
+
+        verify(userAppRepository, times(1)).save(any(UserApp.class));
+        verify(userAppMapper, never()).toUserAppResponseDTO(any());
+    }
+
+    @Test
+    @DisplayName("Should delete a userApp when ID exists")
+    public void deleteById_ShouldDeleteUserApp_WhenIdExists() {
+        Long id = 1L;
+        when(userAppRepository.existsById(id)).thenReturn(true);
+
+        userAppService.deleteById(id);
+
+        verify(userAppRepository, times(1)).existsById(id);
+        verify(userAppRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    @DisplayName("Should throw ResourceNotFoundException when deleting non-existent ID")
+    public void deleteById_ShouldThrowException_WhenIdDoesNotExist() {
+        Long id = 1L;
+        when(userAppRepository.existsById(id)).thenReturn(false);
+
+        assertThrows(ResourceNotFoundException.class, () -> userAppService.deleteById(id));
+
+        verify(userAppRepository, times(1)).existsById(id);
+        verify(userAppRepository, never()).deleteById(anyLong());
+    }
+
+    @Test
+    @DisplayName("Should update and return DTO when ID exists")
+    public void updateById_ShouldReturnUpdatedDTO_WhenIdExists() {
+        // 1. ARRANGE
+        Long id = 1L;
+        String rawPassword = "secret";
+        String encodedPassword = "encoded_secret";
+
+        Role role = new Role(10L, "ADMIN", new HashSet<>());
+        Set<Role> roleSet = new HashSet<>(Collections.singletonList(role));
+
+        UserAppRequestDTO requestDTO = UserAppRequestDTO.builder()
+                .username("new_username")
+                .password(rawPassword)
+                .roleSet(roleSet)
+                .build();
+
+        UserApp existingUser = UserApp.builder()
+                .id(id)
+                .username("old_username")
+                .password("old_encoded_pass")
+                .roleSet(new HashSet<>())
+                .build();
+
+        UserApp updatedUser = UserApp.builder()
+                .id(id)
+                .username("new_username")
+                .password(encodedPassword)
+                .roleSet(roleSet)
+                .build();
+
+        UserAppResponseDTO expectedResponseUser = UserAppResponseDTO.builder()
+                .id(id)
+                .username("new_username")
+                .roleSet(roleSet)
+                .build();
+
+        // Stubbings
+        when(userAppRepository.findById(id)).thenReturn(Optional.of(existingUser));
+        when(passwordEncoder.encode(rawPassword)).thenReturn(encodedPassword);
+
+        // IMPORTANTE: Stubbing para el roleService que usa tu bucle for
+        when(roleService.findByIdOptional(10L)).thenReturn(Optional.of(role));
+
+        doNothing().when(userAppMapper).updateUserAppFromDTO(requestDTO, existingUser);
+        when(userAppRepository.save(existingUser)).thenReturn(updatedUser);
+        when(userAppMapper.toUserAppResponseDTO(updatedUser)).thenReturn(expectedResponseUser);
+
+        // 2. ACT
+        UserAppResponseDTO result = userAppService.updateById(id, requestDTO);
+
+        // 3. ASSERT
+        assertAll("Verify update results",
+                () -> assertNotNull(result),
+                () -> assertEquals(expectedResponseUser.getUsername(), result.getUsername()),
+                () -> assertEquals(id, result.getId())
+        );
+
+        verify(userAppRepository).findById(id);
+        verify(passwordEncoder).encode(rawPassword);
+        verify(roleService).findByIdOptional(10L);
+        verify(userAppMapper).updateUserAppFromDTO(requestDTO, existingUser);
+        verify(userAppRepository).save(existingUser);
+
+        // Solo mocks aquí, NUNCA el service bajo prueba
+        verifyNoMoreInteractions(userAppRepository, userAppMapper, passwordEncoder, roleService);
+    }
+
+    @Test
+    @DisplayName("Should throw ResourceNotFoundException when ID does not exist")
+    public void updateById_ShouldThrowException_WhenIdDoesNotExist() {
+
+        Long id = 99L;
+        String rawPassword = "secret";
+        String encodedPassword = "encoded_secret";
+
+        Role role = new Role(10L, "ADMIN", new HashSet<>());
+        Set<Role> roleSet = new HashSet<>(Collections.singletonList(role));
+
+        UserAppRequestDTO requestDTO = UserAppRequestDTO.builder()
+                .username("new_username")
+                .password(rawPassword)
+                .roleSet(roleSet)
+                .build();
+
+        when(userAppRepository.findById(id)).thenReturn(Optional.empty());
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
+            userAppService.updateById(id, requestDTO);
+        });
+
+        assertEquals("User '" + id + "' not found.", exception.getMessage());
+
+        verify(userAppRepository, times(1)).findById(id);
+
+        verify(roleService, never()).findByIdOptional(anyLong());
+        verify(userAppMapper, never()).updateUserAppFromDTO(any(), any());
+        verify(userAppRepository, never()).save(any());
+
+        verifyNoMoreInteractions(userAppRepository, userAppMapper, roleService);
+    }
 
 }
