@@ -20,14 +20,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
-//@PreAuthorize("denyAll()")
+@PreAuthorize("denyAll()")
 public class UserAppController {
 
     private final IUserAppService userAppService;
     private final IRoleService roleService;
 
     @GetMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserAppResponseDTO>> getUsers() {
         return ResponseEntity.ok(userAppService.findAll());
     }
