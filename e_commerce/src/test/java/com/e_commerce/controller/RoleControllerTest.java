@@ -112,7 +112,7 @@ public class RoleControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/role - Should create a permission and return 201 Created")
+    @DisplayName("POST /api/role - Should create a role and return 201 Created")
     @WithMockUser(roles = {"ADMIN"})
     public void createRole_ShouldReturnCreated() throws Exception {
 
@@ -153,7 +153,7 @@ public class RoleControllerTest {
     }
 
     @Test
-    @DisplayName("DELETE /api/role/{id} - Should return 24 No Content when successful")
+    @DisplayName("DELETE /api/role/{id} - Should return 204 No Content when successful")
     @WithMockUser(roles = {"ADMIN"})
     public void deleteRole_ShouldReturnNoContent_WhenIdExists() throws Exception {
 
@@ -188,7 +188,7 @@ public class RoleControllerTest {
     @Test
     @DisplayName("PUT /api/role/{id} - Should return 400 Bad Request when update data is invalid")
     @WithMockUser(roles = {"ADMIN"})
-    public void updatePermission_ShouldReturnBadRequest_WhenDataInvalid() throws Exception {
+    public void updateRole_ShouldReturnBadRequest_WhenDataInvalid() throws Exception {
         RoleRequestDTO invalidRequest = new RoleRequestDTO("",new HashSet<>());
 
         mockMvc.perform(put("/api/role/{id}", 1L)
@@ -207,14 +207,14 @@ public class RoleControllerTest {
         validPermissions.add(new Permission());
         RoleRequestDTO requestDTO = new RoleRequestDTO("NEW_NAME",validPermissions);
 
-        when(roleService.updateById(eq(id), any())).thenThrow(new ResourceNotFoundException("Role '\"+ id +\"' not found."));
+        when(roleService.updateById(eq(id), any())).thenThrow(new ResourceNotFoundException("Role '"+ id +"' not found."));
 
         mockMvc.perform(put("/api/role/{id}", id)
                         .with(csrf())
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.message").value("Role '\"+ id +\"' not found."));
+                .andExpect(jsonPath("$.message").value("Role '"+ id +"' not found."));
     }
 
     @Test

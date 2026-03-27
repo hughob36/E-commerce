@@ -1,7 +1,10 @@
 package com.e_commerce.controller;
 
+import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.dto.RoleResponseDTO;
+import com.e_commerce.dto.UserAppRequestDTO;
 import com.e_commerce.dto.UserAppResponseDTO;
+import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.model.UserApp;
@@ -22,9 +25,11 @@ import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -135,9 +140,282 @@ public class UserAppControllerTest {
         verify(userAppService, times(1)).findById(id);
     }
 
+    @Test
+    @DisplayName("GET /api/user/{id} - Should return 404 Not Found when permission ID does not exist")
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void getUserAppById_ShouldReturn404_WhenIdDoesNotExist() throws Exception {
 
+        Long id = 99L;
 
+        when(userAppService.findById(id)).thenThrow(new ResourceNotFoundException("User '"+ id +"' not found."));
 
+        mockMvc.perform(get("/api/user/{id}", id))
+                .andExpect(status().isNotFound());
 
+        verify(userAppService, times(1)).findById(id);
+    }
+
+    @Test
+    @DisplayName("POST /api/user - Should create a user and return 201 Created")
+    @WithMockUser(roles = {"ADMIN"})
+    public void createUser_ShouldReturnCreated() throws Exception {
+
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(new Role());
+        UserAppRequestDTO userAppRequestDTO = UserAppRequestDTO.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("jperez")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        UserAppResponseDTO userAppResponseDTO = UserAppResponseDTO.builder()
+                .id(1L)
+                .name("Juan")
+                .username("jperez")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        when(userAppService.save(any(UserAppRequestDTO.class))).thenReturn(userAppResponseDTO);
+
+        mockMvc.perform(post("/api/user")
+                        .with(csrf())
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userAppRequestDTO)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.name").value("Juan"))
+                .andExpect(jsonPath("$.username").value("jperez"))
+                .andExpect(jsonPath("$.email").value("juan@mail.com"))
+                .andExpect(jsonPath("$.password").value("secret"))
+                .andExpect(jsonPath("$.enable").value(true))
+                .andExpect(jsonPath("$.accountNotExpired").value(true))
+                .andExpect(jsonPath("$.accountNotLocked").value(true))
+                .andExpect(jsonPath("$.credentialNotExpired").value(true))
+                .andExpect(jsonPath("$.roleSet").isArray())
+                .andExpect(jsonPath("$.roleSet", not(empty())));
+
+        verify(userAppService, times(1)).save(any(UserAppRequestDTO.class));
+    }
+
+    @Test
+    @DisplayName("POST /api/user - Should return 400 Bad Request when validation fails")
+    @WithMockUser(roles = {"ADMIN"})
+    public void createUser_ShouldReturnBadRequest_WhenNameIsEmpty() throws Exception {
+        // Arrange
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(new Role());
+        UserAppRequestDTO invalidRequestDTO = UserAppRequestDTO.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+        // Act & Assert
+        mockMvc.perform(post("/api/user")
+                        .with(csrf())
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidRequestDTO)))
+                .andExpect(status().isBadRequest());
+
+        verify(userAppService, never()).save(any());
+    }
+
+    @Test
+    @DisplayName("DELETE /api/user/{id} - Should return 204 No Content when successful")
+    @WithMockUser(roles = {"ADMIN"})
+    public void deleteUser_ShouldReturnNoContent_WhenIdExists() throws Exception {
+
+        Long id = 1L;
+        doNothing().when(userAppService).deleteById(id);
+
+        mockMvc.perform(delete("/api/user/{id}", id)
+                        .with(csrf()))
+                .andExpect(status().isNoContent());
+
+        verify(userAppService, times(1)).deleteById(id);
+    }
+
+    @Test
+    @DisplayName("DELETE /api/user/{id} - Should return 404 Not Found when ID does not exist")
+    @WithMockUser(roles = {"ADMIN"})
+    public void deleteUser_ShouldReturnNotFound_WhenIdDoesNotExist() throws Exception {
+        // Arrange
+        Long id = 99L;
+        doThrow(new ResourceNotFoundException("User '" + id + "' not found."))
+                .when(userAppService).deleteById(id);
+
+        // Act & Assert
+        mockMvc.perform(delete("/api/user/{id}", id)
+                        .with(csrf()))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("User '"+ id +"' not found."));
+
+        verify(userAppService, times(1)).deleteById(id);
+    }
+
+    @Test
+    @DisplayName("PUT /api/user/{id} - Should return 400 Bad Request when update data is invalid")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updateUser_ShouldReturnBadRequest_WhenDataInvalid() throws Exception {
+
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(new Role());
+        UserAppRequestDTO invalidRequestDTO = UserAppRequestDTO.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        mockMvc.perform(put("/api/user/{id}", 1L)
+                        .with(csrf())
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidRequestDTO)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("PUT /api/user/{id} - Should return 404 Not Found when updating non-existent ID")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updateUser_ShouldReturnNotFound_WhenIdDoesNotExist() throws Exception {
+        Long id = 99L;
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(new Role());
+        UserAppRequestDTO requestDTO = UserAppRequestDTO.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("jperez")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        when(userAppService.updateById(eq(id), any())).thenThrow(new ResourceNotFoundException("User '"+ id +"' not found."));
+
+        mockMvc.perform(put("/api/user/{id}", id)
+                        .with(csrf())
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDTO)))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("User '"+ id +"' not found."));
+    }
+
+    @Test
+    @DisplayName("PUT /api/user/{id} - Should return 200 OK when update is successful")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updateUser_ShouldReturnOk_WhenDataIsValid() throws Exception {
+        // Arrange
+        Long id = 1L;
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(new Role());
+        UserAppRequestDTO requestDTO = UserAppRequestDTO.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("jperez")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        UserAppResponseDTO responseDTO = UserAppResponseDTO.builder()
+                .id(1L)
+                .name("Juan")
+                .username("jperez2")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        when(userAppService.updateById(eq(id), any(UserAppRequestDTO.class))).thenReturn(responseDTO);
+
+        // Act & Assert
+        mockMvc.perform(put("/api/user/{id}", id)
+                        .with(csrf())
+                        .contentType(APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.name").value("Juan"))
+                .andExpect(jsonPath("$.username").value("jperez2"))
+                .andExpect(jsonPath("$.email").value("juan@mail.com"))
+                .andExpect(jsonPath("$.password").value("secret"))
+                .andExpect(jsonPath("$.enable").value(true))
+                .andExpect(jsonPath("$.accountNotExpired").value(true))
+                .andExpect(jsonPath("$.accountNotLocked").value(true))
+                .andExpect(jsonPath("$.credentialNotExpired").value(true))
+                .andExpect(jsonPath("$.roleSet").isArray())
+                .andExpect(jsonPath("$.roleSet", not(empty())));
+
+        verify(userAppService, times(1)).updateById(eq(id), any(UserAppRequestDTO.class));
+    }
 
 }
