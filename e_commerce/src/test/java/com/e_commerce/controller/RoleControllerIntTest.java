@@ -1,6 +1,5 @@
 package com.e_commerce.controller;
 
-import com.e_commerce.dto.PermissionRequestDTO;
 import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;

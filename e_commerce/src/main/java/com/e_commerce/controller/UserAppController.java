@@ -33,11 +33,13 @@ public class UserAppController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<UserAppResponseDTO> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userAppService.findById(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserAppResponseDTO> createUserApp(@RequestBody  @Valid UserAppRequestDTO userAppRequestDTO) {
         UserAppResponseDTO newUserApp = userAppService.save(userAppRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUserApp);
