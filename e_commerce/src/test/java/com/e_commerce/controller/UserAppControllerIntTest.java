@@ -1,5 +1,6 @@
 package com.e_commerce.controller;
 
+import com.e_commerce.dto.RoleRequestDTO;
 import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.model.UserApp;
@@ -26,8 +27,7 @@ import static org.hamcrest.Matchers.hasItem;
 
 import static org.hamcrest.Matchers.hasSize;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -334,7 +334,6 @@ public class UserAppControllerIntTest {
                     assertThat(response).contains("error_detalle");
                 });
 
-        // 3. Verificación adicional: Que en la DB solo siga existiendo 1 registro
         long count = userAppRepository.findAll().stream()
                 .filter(p -> "ADMIN".equals(p.getUsername()))
                 .count();
@@ -380,6 +379,170 @@ public class UserAppControllerIntTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userApp)))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @DisplayName("DELETE /api/user/{id} - Should delete user and return 204")
+    @WithMockUser(roles = {"ADMIN"})
+    public void deleteUserApp_Success() throws Exception {
+
+        userAppRepository.deleteAll();
+        roleRepository.deleteAll();
+        Set<Permission> permissionSet = new HashSet<>();
+        Role role = new Role();
+        role.setRole("ADM");
+        role.setPermissionSet(permissionSet);
+        roleRepository.save(role);
+
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+
+        UserApp userApp = UserApp.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("ADMIN")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        UserApp saved = userAppRepository.save(userApp);
+        Long idToDelete = saved.getId();
+
+        mockMvc.perform(delete("/api/user/{id}", idToDelete))
+                .andExpect(status().isNoContent());
+
+        boolean exists = userAppRepository.existsById(idToDelete);
+        assertThat(exists).isFalse();
+    }
+
+    @Test
+    @DisplayName("DELETE /api/user/{id} - Should return 404 when id does not exist")
+    @WithMockUser(roles = {"ADMIN"})
+    public void deleteUserApp_NotFound() throws Exception {
+        Long nonExistentId = 999L;
+
+        mockMvc.perform(delete("/api/user/{id}", nonExistentId))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("PUT /api/user/{id} - Should update username successfully")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updateUserSuccess() throws Exception {
+
+        userAppRepository.deleteAll();
+        roleRepository.deleteAll();
+        Set<Permission> permissionSet = new HashSet<>();
+        Role role = new Role();
+        role.setRole("ADM");
+        role.setPermissionSet(permissionSet);
+        roleRepository.save(role);
+
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+
+        UserApp original = UserApp.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("OLD_NAME")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        UserApp saved = userAppRepository.save(original);
+        Long id = saved.getId();
+
+        UserApp updateRequest = UserApp.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("NEW_NAME")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        // 2. Act & Assert
+        mockMvc.perform(put("/api/user/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("NEW_NAME"));
+
+        UserApp updatedInDb = userAppRepository.findById(id).get();
+        assertThat(updatedInDb.getUsername()).isEqualTo("NEW_NAME");
+    }
+
+    @Test
+    @DisplayName("PUT /api/user/{id} - Should return 404 when trying to update non-existent id")
+    @WithMockUser(roles = {"ADMIN"})
+    public void updateUserApp_NotFound() throws Exception {
+
+        userAppRepository.deleteAll();
+        roleRepository.deleteAll();
+        Set<Permission> permissionSet = new HashSet<>();
+        Role role = new Role();
+        role.setRole("ADM");
+        role.setPermissionSet(permissionSet);
+        roleRepository.save(role);
+
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+
+        UserApp updateRequest = UserApp.builder()
+                .name("Juan")
+                .lastName("Perez")
+                .username("ANY_NAME")
+                .email("juan@mail.com")
+                .password("secret")
+                .enable(true)
+                .accountNotExpired(true)
+                .accountNotLocked(true)
+                .credentialNotExpired(true)
+                .roleSet(roleSet)
+                .phone("111111")
+                .address("user prueba")
+                .city("cityPrueba")
+                .state("estadoPrueba")
+                .postalCode("3232")
+                .country("countryPrueba")
+                .build();
+
+        mockMvc.perform(put("/api/user/{id}", 9999L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isNotFound());
     }
 
 

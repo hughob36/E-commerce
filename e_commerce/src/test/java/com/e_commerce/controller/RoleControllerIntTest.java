@@ -244,7 +244,7 @@ public class RoleControllerIntTest {
     public void deleteRole_NotFound() throws Exception {
         Long nonExistentId = 999L;
         // Act & Assert
-        mockMvc.perform(delete("/api/permission/{id}", nonExistentId))
+        mockMvc.perform(delete("/api/role/{id}", nonExistentId))
                 .andExpect(status().isNotFound());
     }
 
@@ -285,7 +285,7 @@ public class RoleControllerIntTest {
     @Test
     @DisplayName("PUT /api/role/{id} - Should return 404 when trying to update non-existent id")
     @WithMockUser(roles = {"ADMIN"})
-    public void updatePermission_NotFound() throws Exception {
+    public void updateRole_NotFound() throws Exception {
 
         Permission permission = new Permission();
         permission.setPermissionName("READ_PRIVILEGE6");

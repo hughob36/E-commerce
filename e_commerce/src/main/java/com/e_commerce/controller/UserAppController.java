@@ -46,12 +46,14 @@ public class UserAppController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteUserById(@PathVariable Long id) {
         userAppService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserAppResponseDTO> updateUserById(@PathVariable Long id, @RequestBody @Valid UserAppRequestDTO userAppRequestDTO) {
         UserAppResponseDTO newUserApp = userAppService.updateById(id,userAppRequestDTO);
         return ResponseEntity.ok(newUserApp);
