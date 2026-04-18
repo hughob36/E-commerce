@@ -23,7 +23,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // ID
+    private Long id;
 
     @Column(nullable = false, length = 255)
     private String name; // Nombre
