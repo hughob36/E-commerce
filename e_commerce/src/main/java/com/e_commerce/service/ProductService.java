@@ -50,6 +50,10 @@ public class ProductService implements IProductService{
 
     @Override
     public ProductResponseDTO update(Long id, ProductRequestDTO productRequestDTO) {
-        return null;
+        Product foundProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product '"+ id +"' not found."));
+        productMapper.updateProductFromDTO(productRequestDTO,foundProduct);
+        Product updateProduct = productRepository.save(foundProduct);
+        return productMapper.toProductResponseDTO(updateProduct);
     }
 }
