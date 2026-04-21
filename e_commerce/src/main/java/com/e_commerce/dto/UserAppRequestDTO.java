@@ -7,12 +7,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.Set;
 
-@Component
+
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
