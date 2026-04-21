@@ -19,13 +19,13 @@ public class CategoryService implements ICategoryService{
     private final ICategoryMapper categoryMapper;
 
     @Override
-    public List<CategoryResponseDTO> getAllCategory() {
+    public List<CategoryResponseDTO> findAllCategory() {
         List<Category> categoryList = categoryRepository.findAll();
         return categoryMapper.toCategoryResponseDTOList(categoryList);
     }
 
     @Override
-    public CategoryResponseDTO getCategoryById(Long id) {
+    public CategoryResponseDTO findCategoryById(Long id) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category '"+ id +"' not found."));
         return categoryMapper.toCategoryResponseDTO(foundCategory);

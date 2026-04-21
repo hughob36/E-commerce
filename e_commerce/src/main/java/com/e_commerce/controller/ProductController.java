@@ -3,6 +3,7 @@ package com.e_commerce.controller;
 import com.e_commerce.dto.ProductRequestDTO;
 import com.e_commerce.dto.ProductResponseDTO;
 import com.e_commerce.service.IProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody @Valid ProductRequestDTO productRequestDTO) {
         ProductResponseDTO saveProductResponseDTO = productService.save(productRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(saveProductResponseDTO);
     }
@@ -42,7 +43,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProductById(@PathVariable Long id, @RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> updateProductById(@PathVariable Long id, @RequestBody @Valid ProductRequestDTO productRequestDTO) {
         ProductResponseDTO productResponseDTO = productService.update(id,productRequestDTO);
         return ResponseEntity.ok(productResponseDTO);
     }
