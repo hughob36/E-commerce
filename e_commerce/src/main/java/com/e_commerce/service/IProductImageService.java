@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IProductImageService {
 
-    public List<ProductImageResponseDTO> getAllProductImage();
-    public ProductImageResponseDTO getFindProductImageById(Long id);
+    public List<ProductImageResponseDTO> findAllProductImage();
+    public ProductImageResponseDTO findProductImageById(Long id);
     public ProductImageResponseDTO saveProductImage(ProductImageRequestDTO productImageRequestDTO);
     public void deleteProductImageById(Long id);
     public ProductImageResponseDTO updateProductImageById(Long id, ProductImageRequestDTO productImageRequestDTO);

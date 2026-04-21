@@ -2,8 +2,6 @@ package com.e_commerce.service;
 
 import com.e_commerce.dto.ProductImageRequestDTO;
 import com.e_commerce.dto.ProductImageResponseDTO;
-import com.e_commerce.dto.ProductRequestDTO;
-import com.e_commerce.dto.ProductResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.IProductImageMapper;
 import com.e_commerce.model.ProductImage;
@@ -21,13 +19,13 @@ public class ProductImageService implements IProductImageService{
     private final IProductImageMapper productImageMapper;
 
     @Override
-    public List<ProductImageResponseDTO> getAllProductImage() {
+    public List<ProductImageResponseDTO> findAllProductImage() {
         List<ProductImage> productImagesList = productImageRepository.findAll();
         return productImageMapper.toProductImageResponseDTOList(productImagesList);
     }
 
     @Override
-    public ProductImageResponseDTO getFindProductImageById(Long id) {
+    public ProductImageResponseDTO findProductImageById(Long id) {
         ProductImage productImage = productImageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ProductImage '"+ id +"' not found."));
         return productImageMapper.toProductImageResponseDTO(productImage);
