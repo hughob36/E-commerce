@@ -19,8 +19,8 @@ public class CategoryResponseDTO {
     private String name;
     private String description;
     private Category parentCategory;
-    private List<Category> subCategories;
+    private List<CategoryResponseDTO> subCategories;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<Product> products;
+    private List<ProductResponseDTO> products;
 }

@@ -39,12 +39,12 @@ public class ProductRequestDTO {
     private String sku;
 
     @NotNull(message = "La categoría es obligatoria")
-    private Category category;
+    private Long categoryId;
 
     @Size(max = 500, message = "La URL de la imagen es demasiado larga")
     private String imageUrl;
 
     private Boolean isActive = true;
 
-    private List<ProductImage> images; // Lista de URLs para las imágenes adicionale
+    private List<Long> imagesId;
 }

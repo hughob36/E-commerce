@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ProductImageResponseDTO {
 
     private Long id;
-    private Product product;
+    private Long productId;
     private String imageUrl;
     private Boolean isPrimary = false;
     private Integer order;

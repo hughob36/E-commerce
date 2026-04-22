@@ -28,6 +28,6 @@ public class CategoryRequestDTO {
     private String description;
 
     private Category parentCategory;
-    private List<Category> subCategories;
-    private List<Product> products;
+    private List<CategoryRequestDTO> subCategories;
+    private List<ProductRequestDTO> products;
 }

@@ -15,7 +15,7 @@ import lombok.Setter;
 public class ProductImageRequestDTO {
 
     @NotNull(message = "Product ID is required")
-    private Product product;
+    private Long productId;
 
     @NotBlank(message = "Image URL cannot be blank")
     @Size(max = 500, message = "Image URL must not exceed 500 characters")

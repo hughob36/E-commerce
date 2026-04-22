@@ -22,10 +22,10 @@ public class ProductResponseDTO {
     private BigDecimal price;
     private Integer stock;
     private String sku;
-    private Category category;
+    private CategoryResponseDTO category;
     private String imageUrl;
     private Boolean isActive = true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<ProductImage> images;
+    private List<ProductImageResponseDTO> images;
 }
