@@ -54,7 +54,6 @@ public class ProductService implements IProductService{
                 .orElseThrow(() -> new ResourceNotFoundException("Product/Category '"+ productRequestDTO.getCategoryId() +"' not found."));
         product.setCategory(category);
 
-
         // 3. Hidratar Imagenes (Consultando todas de una vez)
         if (productRequestDTO.getImagesId() != null && !productRequestDTO.getImagesId().isEmpty()) {
             List<ProductImage> productImages = productImageRepository.findAllById(productRequestDTO.getImagesId());
@@ -83,6 +82,21 @@ public class ProductService implements IProductService{
     public ProductResponseDTO update(Long id, ProductRequestDTO productRequestDTO) {
         Product foundProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product '"+ id +"' not found."));
+
+        Category category = categoryRepository.findById(productRequestDTO.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Product/Category '"+ productRequestDTO.getCategoryId() +"' not found."));
+        foundProduct.setCategory(category);
+
+        if (productRequestDTO.getImagesId() != null && !productRequestDTO.getImagesId().isEmpty()) {
+            List<ProductImage> productImages = productImageRepository.findAllById(productRequestDTO.getImagesId());
+
+            if (productImages.size() != productRequestDTO.getImagesId().size()) {
+                throw new ResourceNotFoundException("One or more image IDs not found");
+            }
+            productImages.forEach(img -> img.setProduct(foundProduct));
+            foundProduct.setImages(productImages);
+        }
+
         productMapper.updateProductFromDTO(productRequestDTO,foundProduct);
         Product updateProduct = productRepository.save(foundProduct);
         return productMapper.toProductResponseDTO(updateProduct);
