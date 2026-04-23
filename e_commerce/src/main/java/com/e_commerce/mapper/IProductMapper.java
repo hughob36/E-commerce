@@ -1,9 +1,6 @@
 package com.e_commerce.mapper;
 
-import com.e_commerce.dto.CategoryResponseDTO;
-import com.e_commerce.dto.ProductImageResponseDTO;
-import com.e_commerce.dto.ProductRequestDTO;
-import com.e_commerce.dto.ProductResponseDTO;
+import com.e_commerce.dto.*;
 import com.e_commerce.model.Category;
 import com.e_commerce.model.Product;
 import com.e_commerce.model.ProductImage;
@@ -28,11 +25,7 @@ public interface IProductMapper {
     @Mapping(target = "images", ignore = true)
     public void updateProductFromDTO(ProductRequestDTO productRequestDTO,@MappingTarget Product product);
 
-
-    // 2. Definimos estos métodos "ayudantes" para que MapStruct los use
-    // internamente al mapear el ProductResponseDTO
-    @Mapping(target = "products", ignore = true)
-    CategoryResponseDTO toCategoryResponseDTO(Category category);
+    CategoryResponseSimpleDTO toCategoryResponseDTO(Category category);
 
     ProductImageResponseDTO toProductImageResponseDTO(ProductImage productImage);
 

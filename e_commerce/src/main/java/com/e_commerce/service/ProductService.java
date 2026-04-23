@@ -28,9 +28,8 @@ public class ProductService implements IProductService{
     private final IProductRepository productRepository;
     private final IProductMapper productMapper;
     private final ICategoryRepository categoryRepository;
-    private final ICategoryMapper categoryMapper;
     private final IProductImageRepository productImageRepository;
-    private final IProductImageMapper productImageMapper;
+
 
     @Override
     public List<ProductResponseDTO> findAll() {
@@ -58,14 +57,14 @@ public class ProductService implements IProductService{
 
         // 3. Hidratar Imagenes (Consultando todas de una vez)
         if (productRequestDTO.getImagesId() != null && !productRequestDTO.getImagesId().isEmpty()) {
-            List<ProductImage> images = productImageRepository.findAllById(productRequestDTO.getImagesId());
+            List<ProductImage> productImages = productImageRepository.findAllById(productRequestDTO.getImagesId());
             // Validamos si falto alguna imagen por encontrar
-            if (images.size() != productRequestDTO.getImagesId().size()) {
+            if (productImages.size() != productRequestDTO.getImagesId().size()) {
                 throw new ResourceNotFoundException("One or more image IDs not found");
             }
             // Seteamos la relación bidireccional si es necesario
-            images.forEach(img -> img.setProduct(product));
-            product.setImages(images);
+            productImages.forEach(img -> img.setProduct(product));
+            product.setImages(productImages);
         }
         Product savedProduct = productRepository.save(product);
 

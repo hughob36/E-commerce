@@ -1,10 +1,6 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Category;
-import com.e_commerce.model.Product;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +23,9 @@ public class CategoryRequestDTO {
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
-    private Category parentCategory;
-    private List<CategoryRequestDTO> subCategories;
-    private List<ProductRequestDTO> products;
+    private Long parentCategoryId;
+
+    //private Category parentCategory;
+    //private List<CategoryRequestDTO> subCategories;
+    //private List<ProductRequestDTO> products;
 }
