@@ -23,12 +23,7 @@ public class ProductResponseDTO {
     private Integer stock;
     private String sku;
 
-    // Usamos el DTO, pero cuidado: si CategoryResponseDTO tiene lista de productos,
-    // podrías crear recursividad otra vez.
-    // Sugerencia: Crea un CategorySimpleDTO (solo id y nombre) para el producto.
     private CategoryResponseSimpleDTO category;
-
-
     private String imageUrl;
     private Boolean isActive = true;
     private LocalDateTime createdAt;

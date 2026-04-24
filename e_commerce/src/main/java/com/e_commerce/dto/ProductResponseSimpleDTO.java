@@ -1,6 +1,5 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +8,12 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductImageResponseDTO {
+public class ProductResponseSimpleDTO {
 
     private Long id;
-    private ProductResponseSimpleDTO product;
+    private String name;
+    private String sku;
     private String imageUrl;
-    private Boolean isPrimary = false;
-    private Integer order;
+
+
 }

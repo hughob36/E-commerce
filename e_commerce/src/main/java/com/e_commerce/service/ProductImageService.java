@@ -4,8 +4,10 @@ import com.e_commerce.dto.ProductImageRequestDTO;
 import com.e_commerce.dto.ProductImageResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.IProductImageMapper;
+import com.e_commerce.model.Product;
 import com.e_commerce.model.ProductImage;
 import com.e_commerce.repository.IProductImageRepository;
+import com.e_commerce.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class ProductImageService implements IProductImageService{
 
     private final IProductImageRepository productImageRepository;
     private final IProductImageMapper productImageMapper;
+    private final IProductRepository productRepository;
 
     @Override
     public List<ProductImageResponseDTO> findAllProductImage() {
@@ -34,6 +37,12 @@ public class ProductImageService implements IProductImageService{
     @Override
     public ProductImageResponseDTO saveProductImage(ProductImageRequestDTO productImageRequestDTO) {
         ProductImage productImage = productImageMapper.toProductImage(productImageRequestDTO);
+
+        Product product = productRepository.findById(productImageRequestDTO.getProductId())
+                .orElseThrow(() -> new ResourceNotFoundException("Product '"+ productImageRequestDTO.getProductId() +"' not found."));
+        productImage.setProduct(product);
+
+
         ProductImage savedProductImage = productImageRepository.save(productImage);
         return productImageMapper.toProductImageResponseDTO(savedProductImage);
     }
@@ -50,6 +59,11 @@ public class ProductImageService implements IProductImageService{
     public ProductImageResponseDTO updateProductImageById(Long id, ProductImageRequestDTO productImageRequestDTO) {
         ProductImage foundProductImage = productImageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ProductImage '"+ id +"' not found."));
+
+        Product product = productRepository.findById(productImageRequestDTO.getProductId())
+                .orElseThrow(() -> new ResourceNotFoundException("Product '"+ productImageRequestDTO.getProductId() +"' not found."));
+        foundProductImage.setProduct(product);
+
         productImageMapper.updateProductImageAppFromDTO(productImageRequestDTO,foundProductImage);
         ProductImage updateProductImage = productImageRepository.save(foundProductImage);
         return productImageMapper.toProductImageResponseDTO(updateProductImage);
