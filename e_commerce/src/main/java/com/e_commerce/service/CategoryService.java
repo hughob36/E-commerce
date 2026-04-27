@@ -10,8 +10,10 @@ import com.e_commerce.repository.ICategoryRepository;
 import com.e_commerce.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -28,9 +30,24 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CategoryResponseDTO findCategoryById(Long id) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category '"+ id +"' not found."));
+
+        //foundCategory.getSubCategories().size();
+        //foundCategory.getProducts().size();
+
+       /* // RESALTADO: Paso 1 - Traemos la entidad y cargamos la primera lista (subcategorías)
+        Category foundCategory = categoryRepository.findWithSubCategoriesById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Category '"+ id +"' not found."));
+
+        // RESALTADO: Paso 2 - Ejecutamos la segunda consulta para el mismo ID
+        // Hibernate detecta que ya tiene la categoría 'id' en su caché y le "pega" los productos
+        categoryRepository.findWithProductsById(id);*/
+
+
+
         return categoryMapper.toCategoryResponseDTO(foundCategory);
     }
 
@@ -45,9 +62,11 @@ public class CategoryService implements ICategoryService{
         }
 
         List<Category> subCategories = categoryRepository.findAllById(categoryRequestDTO.getSubCategoriesIds());
+        subCategories.forEach(sub -> sub.setParentCategory(categoryRequest));
         categoryRequest.setSubCategories(subCategories);
 
         List<Product> productsList = productRepository.findAllById(categoryRequestDTO.getProductIds());
+        productsList.forEach(prod -> prod.setCategory(categoryRequest));
         categoryRequest.setProducts(productsList);
 
         Category saveCategory = categoryRepository.save(categoryRequest);
@@ -66,6 +85,21 @@ public class CategoryService implements ICategoryService{
     public CategoryResponseDTO updateCategoryById(Long id, CategoryRequestDTO categoryRequestDTO) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category '"+ id +"' not found."));
+
+        if(categoryRequestDTO.getParentCategoryId() != null) {
+            Category parentCategory = categoryRepository.findById(categoryRequestDTO.getParentCategoryId())
+                    .orElse(null);
+            foundCategory.setParentCategory(parentCategory);
+        }
+
+        List<Category> subCategories = categoryRepository.findAllById(categoryRequestDTO.getSubCategoriesIds());
+        subCategories.forEach(sub -> sub.setParentCategory(foundCategory));
+        foundCategory.setSubCategories(subCategories);
+
+        List<Product> productsList = productRepository.findAllById(categoryRequestDTO.getProductIds());
+        productsList.forEach(prod -> prod.setCategory(foundCategory));
+        foundCategory.setProducts(productsList);
+
         categoryMapper.updateCategoryFromDTO(categoryRequestDTO,foundCategory);
         Category updateCategory = categoryRepository.save(foundCategory);
         return categoryMapper.toCategoryResponseDTO(updateCategory);

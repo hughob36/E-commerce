@@ -1,7 +1,5 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Category;
-import com.e_commerce.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
