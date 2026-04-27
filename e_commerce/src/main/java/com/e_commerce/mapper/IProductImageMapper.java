@@ -18,8 +18,6 @@ public interface IProductImageMapper {
 
     public List<ProductImageResponseDTO> toProductImageResponseDTOList(List<ProductImage> productImageList);
 
-    //@Mapping(target = "product", ignore = true)
-    @Mapping(target = "product", expression = "java(toProductResponseSimpleDTO(productImage.getProduct()))")
     public ProductImageResponseDTO toProductImageResponseDTO(ProductImage productImage);
 
     @Mapping(target = "product", ignore = true)
@@ -28,18 +26,10 @@ public interface IProductImageMapper {
     @Mapping(target = "product", ignore = true)
     public void updateProductImageAppFromDTO(ProductImageRequestDTO productImageRequestDTO, @MappingTarget ProductImage productImage);
 
-
-    //public ProductResponseSimpleDTO toProductResponseDTO(Product product);
-
-    // 2. Este metodo es el que CREA el DTO simple sin las listas conflictivas
-    default ProductResponseSimpleDTO toProductResponseSimpleDTO(Product product) {
-        if (product == null) return null;
-        return new ProductResponseSimpleDTO(
-                product.getId(),
-                product.getName(),
-                product.getSku(),
-                product.getImageUrl()
-        );
-    }
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "sku", source = "sku")
+    @Mapping(target = "imageUrl", source = "imageUrl")
+    public ProductResponseSimpleDTO toProductResponseDTO(Product product);
 
 }
