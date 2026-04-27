@@ -24,8 +24,6 @@ public class CategoryRequestDTO {
     private String description;
 
     private Long parentCategoryId;
-
-    //private Category parentCategory;
-    //private List<CategoryRequestDTO> subCategories;
-    //private List<ProductRequestDTO> products;
+    private List<Long> subCategoriesIds;
+    private List<Long> productIds;
 }

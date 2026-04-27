@@ -42,7 +42,6 @@ public class ProductImageService implements IProductImageService{
                 .orElseThrow(() -> new ResourceNotFoundException("Product '"+ productImageRequestDTO.getProductId() +"' not found."));
         productImage.setProduct(product);
 
-
         ProductImage savedProductImage = productImageRepository.save(productImage);
         return productImageMapper.toProductImageResponseDTO(savedProductImage);
     }

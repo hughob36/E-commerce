@@ -5,7 +5,9 @@ import com.e_commerce.dto.CategoryResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.ICategoryMapper;
 import com.e_commerce.model.Category;
+import com.e_commerce.model.Product;
 import com.e_commerce.repository.ICategoryRepository;
+import com.e_commerce.repository.IProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class CategoryService implements ICategoryService{
 
     private final ICategoryRepository categoryRepository;
     private final ICategoryMapper categoryMapper;
+    private final IProductRepository productRepository;
 
     @Override
     public List<CategoryResponseDTO> findAllCategory() {
@@ -34,6 +37,19 @@ public class CategoryService implements ICategoryService{
     @Override
     public CategoryResponseDTO saveCategory(CategoryRequestDTO categoryRequestDTO) {
         Category categoryRequest = categoryMapper.toCategory(categoryRequestDTO);
+
+        if(categoryRequestDTO.getParentCategoryId() != null) {
+            Category parentCategory = categoryRepository.findById(categoryRequestDTO.getParentCategoryId())
+                    .orElse(null);
+            categoryRequest.setParentCategory(parentCategory);
+        }
+
+        List<Category> subCategories = categoryRepository.findAllById(categoryRequestDTO.getSubCategoriesIds());
+        categoryRequest.setSubCategories(subCategories);
+
+        List<Product> productsList = productRepository.findAllById(categoryRequestDTO.getProductIds());
+        categoryRequest.setProducts(productsList);
+
         Category saveCategory = categoryRepository.save(categoryRequest);
         return categoryMapper.toCategoryResponseDTO(saveCategory);
     }
