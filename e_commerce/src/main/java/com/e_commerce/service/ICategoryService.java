@@ -2,7 +2,6 @@ package com.e_commerce.service;
 
 import com.e_commerce.dto.CategoryRequestDTO;
 import com.e_commerce.dto.CategoryResponseDTO;
-import com.e_commerce.model.Category;
 
 import java.util.List;
 

@@ -1,12 +1,8 @@
 package com.e_commerce.service;
 
-import com.e_commerce.dto.CategoryResponseDTO;
-import com.e_commerce.dto.ProductImageResponseDTO;
 import com.e_commerce.dto.ProductRequestDTO;
 import com.e_commerce.dto.ProductResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
-import com.e_commerce.mapper.ICategoryMapper;
-import com.e_commerce.mapper.IProductImageMapper;
 import com.e_commerce.mapper.IProductMapper;
 import com.e_commerce.model.Category;
 import com.e_commerce.model.Product;
@@ -18,7 +14,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,7 +56,7 @@ public class ProductService implements IProductService{
             if (productImages.size() != productRequestDTO.getImagesId().size()) {
                 throw new ResourceNotFoundException("One or more image IDs not found");
             }
-            // Seteamos la relación bidireccional si es necesario
+            // Seteamos la relacion bidireccional si es necesario
             productImages.forEach(img -> img.setProduct(product));
             product.setImages(productImages);
         }

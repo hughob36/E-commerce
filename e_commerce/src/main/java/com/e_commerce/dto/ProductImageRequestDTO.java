@@ -1,6 +1,5 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Product;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
