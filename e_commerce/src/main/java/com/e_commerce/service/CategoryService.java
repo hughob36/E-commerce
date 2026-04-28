@@ -92,13 +92,28 @@ public class CategoryService implements ICategoryService{
             foundCategory.setParentCategory(parentCategory);
         }
 
-        List<Category> subCategories = categoryRepository.findAllById(categoryRequestDTO.getSubCategoriesIds());
-        subCategories.forEach(sub -> sub.setParentCategory(foundCategory));
-        foundCategory.setSubCategories(subCategories);
+        //  Primero, desvinculamos los hijos actuales (les ponemos el padre en null)
+        // Esto asegura que si alguno no viene en la nueva lista, pierda la relacion en la DB.
+        if (foundCategory.getSubCategories() != null) {
+            foundCategory.getSubCategories().forEach(sub -> sub.setParentCategory(null));
+            foundCategory.getSubCategories().clear();
+        }
 
-        List<Product> productsList = productRepository.findAllById(categoryRequestDTO.getProductIds());
-        productsList.forEach(prod -> prod.setCategory(foundCategory));
-        foundCategory.setProducts(productsList);
+        // Ahora traemos los nuevos hijos y les asignamos el padre
+        List<Category> newSubCategories = categoryRepository.findAllById(categoryRequestDTO.getSubCategoriesIds());
+        newSubCategories.forEach(sub -> sub.setParentCategory(foundCategory));
+        foundCategory.getSubCategories().addAll(newSubCategories);
+
+        // MANEJO DE PRODUCTOS (Para permitir eliminar)
+        // Lo mismo para los productos
+        if (foundCategory.getProducts() != null) {
+            foundCategory.getProducts().forEach(prod -> prod.setCategory(null));
+            foundCategory.getProducts().clear();
+        }
+
+        List<Product> newProductsList = productRepository.findAllById(categoryRequestDTO.getProductIds());
+        newProductsList.forEach(prod -> prod.setCategory(foundCategory));
+        foundCategory.getProducts().addAll(newProductsList);
 
         categoryMapper.updateCategoryFromDTO(categoryRequestDTO,foundCategory);
         Category updateCategory = categoryRepository.save(foundCategory);
