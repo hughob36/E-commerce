@@ -33,20 +33,6 @@ public class CategoryService implements ICategoryService{
     public CategoryResponseDTO findCategoryById(Long id) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category '"+ id +"' not found."));
-
-        //foundCategory.getSubCategories().size();
-        //foundCategory.getProducts().size();
-
-       /* // RESALTADO: Paso 1 - Traemos la entidad y cargamos la primera lista (subcategorías)
-        Category foundCategory = categoryRepository.findWithSubCategoriesById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Category '"+ id +"' not found."));
-
-        // RESALTADO: Paso 2 - Ejecutamos la segunda consulta para el mismo ID
-        // Hibernate detecta que ya tiene la categoría 'id' en su caché y le "pega" los productos
-        categoryRepository.findWithProductsById(id);*/
-
-
-
         return categoryMapper.toCategoryResponseDTO(foundCategory);
     }
 
