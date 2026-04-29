@@ -5,18 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Getter
-@Setter
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartResponseDTO {
+public class CartResponseSimpleDTO {
 
     private Long id;
     private UserAppResponseSimpleDTO user;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private List<CartItemResponseSimpleDTO> cartItems;
 }
