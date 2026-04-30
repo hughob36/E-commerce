@@ -5,6 +5,7 @@ import com.e_commerce.dto.CartResponseDTO;
 import com.e_commerce.model.Cart;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -16,8 +17,5 @@ public interface ICartMapper {
 
     @Mapping(target = "user", ignore = true)
     public Cart toCart(CartRequestDTO cartRequestDTO);
-
-
-
 
 }
