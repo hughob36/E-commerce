@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ICartItemService {
 
-    public List<CartItemResponseDTO> getAllCartItem();
-    public CartItemResponseDTO getCartById(Long id);
+    public List<CartItemResponseDTO> findAll();
+    public CartItemResponseDTO findById(Long id);
     public CartItemResponseDTO save(CartItemRequestDTO cartItemRequestDTO);
     public void deleteById(Long id);
     public CartItemResponseDTO updateById(Long id, CartItemRequestDTO cartItemRequestDTO);
