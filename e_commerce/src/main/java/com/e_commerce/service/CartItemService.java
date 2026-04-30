@@ -46,7 +46,7 @@ public class CartItemService implements ICartItemService {
                 .orElseThrow(() -> new ResourceNotFoundException("Id '"+ cartItemRequestDTO.getCartId() +"' not found."));
         cartItem.setCart(cart);
 
-        Product product = productRepository.findById(cartItemRequestDTO.getCartId())
+        Product product = productRepository.findById(cartItemRequestDTO.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException("Id '"+ cartItemRequestDTO.getProductId() +"' not found."));
         cartItem.setProduct(product);
 

@@ -10,6 +10,7 @@ import com.e_commerce.model.UserApp;
 import com.e_commerce.repository.ICartItemRepository;
 import com.e_commerce.repository.ICartRepository;
 import com.e_commerce.repository.IUserAppRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -56,17 +57,20 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @Transactional
     public CartResponseDTO updateById(Long id, CartRequestDTO cartRequestDTO) {
 
-        Cart cart = cartMapper.toCart(cartRequestDTO);
+        Cart cart = cartRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found with id: " + id));
 
         UserApp user = userAppRepository.findById(cartRequestDTO.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User '"+ cartRequestDTO.getUserId() +"' not found."));
         cart.setUser(user);
 
+        cart.getCartItems().clear();
         List<CartItem> cartItemList = cartItemRepository.findAllById(cartRequestDTO.getCartItemsIds());
         cartItemList.forEach(cartItem -> cartItem.setCart(cart));
-        cart.setCartItems(cartItemList);
+        cart.getCartItems().addAll(cartItemList);
 
         Cart updateCart = cartRepository.save(cart);
 
