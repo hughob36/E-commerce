@@ -12,5 +12,5 @@ public interface IOrderItemService {
     public OrderItemResponseDTO findById(Long id);
     public OrderItemResponseDTO save(OrderItemRequestDTO orderItemRequestDTO);
     public void deleteById(Long id);
-    public updateById(Long id,OrderItemRequestDTO orderItemRequestDTO);
+    public OrderItemResponseDTO updateById(Long id,OrderItemRequestDTO orderItemRequestDTO);
 }
