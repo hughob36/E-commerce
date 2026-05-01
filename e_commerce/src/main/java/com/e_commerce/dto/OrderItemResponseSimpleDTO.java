@@ -1,23 +1,16 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Setter @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItemResponseDTO {
+public class OrderItemResponseSimpleDTO {
 
     private Long id;
     private OrderResponseSimpleDTO order;
     private ProductResponseSimpleDTO product;
-    private Integer quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal subtotal;
 }
