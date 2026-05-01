@@ -61,7 +61,7 @@ public class CartService implements ICartService {
     public CartResponseDTO updateById(Long id, CartRequestDTO cartRequestDTO) {
 
         Cart cart = cartRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cart not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart '"+ id +"' not found."));
 
         UserApp user = userAppRepository.findById(cartRequestDTO.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User '"+ cartRequestDTO.getUserId() +"' not found."));
