@@ -16,7 +16,7 @@ public class OrderItemResponseDTO {
 
     private Long id;
     private OrderResponseSimpleDTO order;
-    private ProductResponseSimpleDTO product;
+    //private ProductResponseSimpleDTO product;
     private Integer quantity;
     private BigDecimal unitPrice;
     private BigDecimal subtotal;

@@ -1,13 +1,14 @@
 package com.e_commerce.controller;
 
+import com.e_commerce.dto.OrderItemRequestDTO;
 import com.e_commerce.dto.OrderItemResponseDTO;
 import com.e_commerce.model.OrderItem;
 import com.e_commerce.service.IOrderItemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderItemController {
 
-    private IOrderItemService orderItemService;
+    private final IOrderItemService orderItemService;
 
     @GetMapping
     public ResponseEntity<List<OrderItemResponseDTO>> getAllOrderItem() {
@@ -24,5 +25,27 @@ public class OrderItemController {
         return ResponseEntity.ok(orderItemResponseDTOList);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderItemResponseDTO> getOrderItemById(@PathVariable Long id) {
+        OrderItemResponseDTO orderItemResponseDTO = orderItemService.findById(id);
+        return ResponseEntity.ok(orderItemResponseDTO);
+    }
 
+    @PostMapping
+    public ResponseEntity<OrderItemResponseDTO> createOrderItem(@RequestBody @Valid OrderItemRequestDTO orderItemRequestDTO) {
+        OrderItemResponseDTO orderItemResponseDTO = orderItemService.save(orderItemRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderItemResponseDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteOrderItemById(@PathVariable Long id) {
+        orderItemService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<OrderItemResponseDTO> updateOrderItemById(@PathVariable Long id,@RequestBody @Valid OrderItemRequestDTO orderItemRequestDTO) {
+        OrderItemResponseDTO orderItemResponseDTO = orderItemService.updateById(id,orderItemRequestDTO);
+        return ResponseEntity.ok(orderItemResponseDTO);
+    }
 }

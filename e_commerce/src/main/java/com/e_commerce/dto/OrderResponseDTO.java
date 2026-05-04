@@ -23,7 +23,5 @@ public class OrderResponseDTO {
     private String shippingCity;
     private String shippingPostalCode;
     private String shippingPhone;
-
-
     private List<Long> orderItemsIds;
 }
