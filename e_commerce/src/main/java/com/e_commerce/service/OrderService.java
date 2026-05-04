@@ -65,6 +65,20 @@ public class OrderService implements IOrderService{
 
     @Override
     public OrderResponseDTO updateById(Long id, OrderRequestDTO orderRequestDTO) {
-        return null;
+        Order foundOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order '"+ id +"' not found."));
+
+        UserApp user = userAppRepository.findById(orderRequestDTO.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User '"+ orderRequestDTO.getUserId() +"' not found."));
+        foundOrder.setUser(user);
+
+        List<OrderItem> orderItemList = orderItemRepository.findAllById(orderRequestDTO.getOrderItemsIds());
+        orderItemList.forEach(item -> item.setOrder(foundOrder));
+        foundOrder.setOrderItems(orderItemList);
+
+        orderMapper.updateOrderFromDTO(orderRequestDTO,foundOrder);
+
+        Order orderUpdate = orderRepository.save(foundOrder);
+        return orderMapper.toOrderResponseDTO(orderUpdate);
     }
 }

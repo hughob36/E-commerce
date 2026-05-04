@@ -1,10 +1,5 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Order;
-import com.e_commerce.model.Product;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;

@@ -20,12 +20,9 @@ public class OrderRequestDTO {
     @Positive(message = "El id. del usuario debe ser un número positivo")
     private Long userId;
 
-
     private BigDecimal totalAmount;
 
-
     private OrderStatus status; // Estado (PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED)
-
 
     private String shippingAddress;
 

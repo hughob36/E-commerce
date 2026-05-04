@@ -20,5 +20,7 @@ public interface IOrderMapper {
     @Mapping(target = "orderItems", ignore = true)
     public Order toOrder(OrderRequestDTO orderRequestDTO);
 
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "orderItems", ignore = true)
     public void updateOrderFromDTO(OrderRequestDTO orderRequestDTO, @MappingTarget Order order);
 }

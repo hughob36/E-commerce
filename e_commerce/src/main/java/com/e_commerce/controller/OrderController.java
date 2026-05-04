@@ -33,7 +33,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody @Valid OrderRequestDTO orderRequestDTO) {
         OrderResponseDTO orderResponseDTO = orderService.save(orderRequestDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderResponseDTO);
     }
 
     @DeleteMapping("/{id}")
