@@ -4,6 +4,7 @@ import com.e_commerce.dto.OrderRequestDTO;
 import com.e_commerce.dto.OrderResponseDTO;
 import com.e_commerce.model.Order;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.util.List;
@@ -15,7 +16,9 @@ public interface IOrderMapper {
 
     public OrderResponseDTO toOrderResponseDTO(Order order);
 
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "orderItems", ignore = true)
     public Order toOrder(OrderRequestDTO orderRequestDTO);
 
-    public void updateOrderResponseDTOFromDTO(OrderRequestDTO orderRequestDTO, @MappingTarget Order order);
+    public void updateOrderFromDTO(OrderRequestDTO orderRequestDTO, @MappingTarget Order order);
 }
