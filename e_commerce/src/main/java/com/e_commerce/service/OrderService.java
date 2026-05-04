@@ -5,7 +5,9 @@ import com.e_commerce.dto.OrderResponseDTO;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.IOrderMapper;
 import com.e_commerce.model.Order;
+import com.e_commerce.model.OrderItem;
 import com.e_commerce.model.UserApp;
+import com.e_commerce.repository.IOrderItemRepository;
 import com.e_commerce.repository.IOrderRepository;
 import com.e_commerce.repository.IUserAppRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class OrderService implements IOrderService{
    private final IOrderRepository orderRepository;
    private final IOrderMapper orderMapper;
    private final IUserAppRepository userAppRepository;
+   private final IOrderItemRepository orderItemRepository;
 
     @Override
     public List<OrderResponseDTO> findAll() {
@@ -43,10 +46,13 @@ public class OrderService implements IOrderService{
                 .orElseThrow(() -> new ResourceNotFoundException("User '"+ orderRequestDTO.getUserId() +"' not found."));
         order.setUser(user);
 
+        List<OrderItem> orderItemList = orderItemRepository.findAllById(orderRequestDTO.getOrderItemsIds());
+        orderItemList.forEach(item -> item.setOrder(order));
+        order.setOrderItems(orderItemList);
 
+        Order savedOrder = orderRepository.save(order);
 
-
-        return null;
+        return orderMapper.toOrderResponseDTO(savedOrder);
     }
 
     @Override
