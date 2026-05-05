@@ -18,6 +18,8 @@ public interface IOrderItemMapper {
 
     public List<OrderItemResponseDTO> toOrderItemResponseDTOList(List<OrderItem> orderItemList);
 
+    @Mapping(target = "order", source = "order") // Mapea la entidad Order al OrderResponseSimpleDTO
+    @Mapping(target = "product", source = "product") // Mapea la entidad Product al ProductResponseSimpleDTO
     public OrderItemResponseDTO toOrderItemResponseDTO(OrderItem orderItem);
 
     @Mapping(target = "order", ignore = true)
