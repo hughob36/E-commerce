@@ -11,6 +11,4 @@ import lombok.Setter;
 public class OrderItemResponseSimpleDTO {
 
     private Long id;
-    private OrderResponseSimpleDTO order;
-    private ProductResponseSimpleDTO product;
 }

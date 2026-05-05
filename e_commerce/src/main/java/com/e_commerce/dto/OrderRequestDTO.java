@@ -21,20 +21,10 @@ public class OrderRequestDTO {
     private Long userId;
 
     private BigDecimal totalAmount;
-
     private OrderStatus status; // Estado (PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED)
-
     private String shippingAddress;
-
-
     private String shippingCity;
-
-
     private String shippingPostalCode;
-
-
     private String shippingPhone;
-
-
     private List<Long> orderItemsIds;
 }
