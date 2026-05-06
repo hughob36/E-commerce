@@ -48,8 +48,9 @@ public class UserAppService implements IUserAppService{
         }
         userAppRequestDTO.setRoleSet(roleSet);
         UserApp userApp = userAppMapper.toUserApp(userAppRequestDTO);
+        UserApp savedUser = userAppRepository.save(userApp);
 
-        return userAppMapper.toUserAppResponseDTO(userAppRepository.save(userApp));
+        return userAppMapper.toUserAppResponseDTO(savedUser);
     }
 
     @Override
@@ -65,14 +66,16 @@ public class UserAppService implements IUserAppService{
         UserApp userAppFound = userAppRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User '"+ id +"' not found."));
 
-        if(userAppRequestDTO.getPassword() != null && !userAppRequestDTO.getPassword().isEmpty()) {
-            userAppFound.setPassword(passwordEncoder.encode(userAppRequestDTO.getPassword()));
-        }
         Set<Role> roleSet = new HashSet<>();
         for(Role role : userAppRequestDTO.getRoleSet()) {
             roleService.findByIdOptional(role.getId()).ifPresent(roleSet::add);
         }
         userAppMapper.updateUserAppFromDTO(userAppRequestDTO,userAppFound);
-        return userAppMapper.toUserAppResponseDTO(userAppRepository.save(userAppFound));
+
+        if(userAppRequestDTO.getPassword() != null && !userAppRequestDTO.getPassword().isEmpty()) {
+            userAppFound.setPassword(passwordEncoder.encode(userAppRequestDTO.getPassword()));
+        }
+        UserApp updateUser = userAppRepository.save(userAppFound);
+        return userAppMapper.toUserAppResponseDTO(updateUser);
     }
 }

@@ -53,7 +53,8 @@ public class UserAppController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<UserAppResponseDTO> updateUserById(@PathVariable Long id, @RequestBody @Valid UserAppRequestDTO userAppRequestDTO) {
         UserAppResponseDTO newUserApp = userAppService.updateById(id,userAppRequestDTO);
         return ResponseEntity.ok(newUserApp);
