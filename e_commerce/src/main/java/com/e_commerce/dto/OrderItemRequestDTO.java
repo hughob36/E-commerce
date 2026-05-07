@@ -14,18 +14,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OrderItemRequestDTO {
 
-    @NotNull(message = "El id. de la orden es obligatoria")
-    @Positive(message = "El id. de la orden debe ser un número positivo")
+    @NotNull(message = "Order ID is required")
+    @Positive(message = "Order ID must be a positive number")
     private Long orderId;
 
-    @NotNull(message = "El id. del producto es obligatorio")
-    @Positive(message = "El id. del producto debe ser un número positivo")
+    @NotNull(message = "Product ID is required")
+    @Positive(message = "Product ID must be a positive number")
     private Long productId;
 
-    @NotNull(message = "La cantidad del producto es obligatoria")
+    @NotNull(message = "Product quantity is required")
     private Integer quantity;
-    @NotNull(message = "El precio unitario del producto es obligatorio")
+    @NotNull(message = "Product unit price is required")
     private BigDecimal unitPrice;
-    @NotNull(message = "El subtotal del producto es obligatorio")
+    @NotNull(message = "Product subtotal is required")
     private BigDecimal subtotal;
 }

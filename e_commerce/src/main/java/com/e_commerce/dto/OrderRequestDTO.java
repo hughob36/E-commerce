@@ -16,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderRequestDTO {
 
-    @NotNull(message = "El id. del usuario es obligatorio")
-    @Positive(message = "El id. del usuario debe ser un número positivo")
+    @NotNull(message = "User ID is required")
+    @Positive(message = "User ID must be a positive number")
     private Long userId;
 
     private BigDecimal totalAmount;

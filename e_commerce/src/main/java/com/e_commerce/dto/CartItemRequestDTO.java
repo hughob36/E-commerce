@@ -12,12 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CartItemRequestDTO {
 
-    @NotNull(message = "El id. del carrito es obligatorio")
-    @Positive(message = "El id. del carrito debe ser un número positivo")
+    @NotNull(message = "Cart ID is required")
+    @Positive(message = "Cart ID must be a positive number")
     private Long cartId;
 
-    @NotNull(message = "El id. del producto es obligatorio")
-    @Positive(message = "El id. del producto debe ser un número positivo")
+    @NotNull(message = "Product ID is required")
+    @Positive(message = "Product ID must be a positive number")
     private Long productId;
     private Integer quantity;
 }
