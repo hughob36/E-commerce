@@ -1,11 +1,6 @@
 package com.e_commerce.dto;
 
-import com.e_commerce.model.Category;
-import com.e_commerce.model.ProductImage;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,6 +9,7 @@ import java.util.List;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductResponseDTO {
 
     private Long id;
