@@ -89,3 +89,82 @@ This generated password is for development use only. Your security configuration
 2026-05-13T16:38:09.372-03:00  INFO 10104 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
 2026-05-13T16:38:09.374-03:00  INFO 10104 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
 2026-05-13T16:38:09.403-03:00  INFO 10104 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.809 seconds (process running for 3.641)
+2026-05-13T16:57:20.875-03:00  INFO 2764 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 2764 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-13T16:57:20.877-03:00  INFO 2764 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T16:57:23.146-03:00  WARN 2764 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 36fb9cef-afad-424e-b4cf-98877bd2f1f3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-05-13T16:57:23.155-03:00  INFO 2764 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-05-13T16:57:23.289-03:00  INFO 2764 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-13T16:57:23.291-03:00  INFO 2764 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-13T16:57:23.292-03:00  INFO 2764 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-05-13T16:57:23.327-03:00  INFO 2764 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.794 seconds (process running for 3.64)
+2026-05-13T17:00:14.141-03:00  INFO 11192 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 11192 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-13T17:00:14.143-03:00  INFO 11192 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T17:00:16.396-03:00  WARN 11192 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c551ff03-f9ab-4c73-b6bf-83d06181c25f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-05-13T17:00:16.415-03:00  INFO 11192 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-05-13T17:00:16.569-03:00  INFO 11192 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-13T17:00:16.569-03:00  INFO 11192 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-13T17:00:16.573-03:00  INFO 11192 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2026-05-13T17:00:16.620-03:00  INFO 11192 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.815 seconds (process running for 3.634)
+2026-05-13T17:02:54.210-03:00  INFO 7768 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 7768 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-13T17:02:54.210-03:00  INFO 7768 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T17:02:56.523-03:00  WARN 7768 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0c701c64-fd95-450c-84f0-0ae0c001abde
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-05-13T17:02:56.531-03:00  INFO 7768 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-05-13T17:02:56.661-03:00  INFO 7768 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-13T17:02:56.661-03:00  INFO 7768 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-13T17:02:56.661-03:00  INFO 7768 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-13T17:02:56.691-03:00  INFO 7768 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.818 seconds (process running for 3.648)
+2026-05-13T17:42:40.068-03:00  INFO 2828 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 2828 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-13T17:42:40.069-03:00  INFO 2828 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T17:42:42.339-03:00  WARN 2828 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: cd7d3d3c-a965-4938-a56b-6d127139a05c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-05-13T17:42:42.360-03:00  INFO 2828 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-05-13T17:42:42.599-03:00  INFO 2828 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-13T17:42:42.599-03:00  INFO 2828 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-13T17:42:42.601-03:00  INFO 2828 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-13T17:42:42.643-03:00  INFO 2828 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.915 seconds (process running for 3.766)
+2026-05-13T17:43:32.247-03:00  INFO 14048 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 14048 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-13T17:43:32.247-03:00  INFO 14048 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T17:43:34.581-03:00  WARN 14048 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: d487fd76-4bf4-41a5-80af-bf93a8ba21d9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-05-13T17:43:34.593-03:00  INFO 14048 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-05-13T17:43:34.725-03:00  INFO 14048 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-13T17:43:34.725-03:00  INFO 14048 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-13T17:43:34.725-03:00  INFO 14048 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-13T17:43:34.753-03:00  INFO 14048 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.854 seconds (process running for 3.694)
+2026-05-13T17:44:52.861-03:00  INFO 13888 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 13888 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-13T17:44:52.862-03:00  INFO 13888 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T17:44:55.057-03:00  WARN 13888 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 8b47d52d-3380-4e33-9184-7c0cfb3bf6e9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-05-13T17:44:55.065-03:00  INFO 13888 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-05-13T17:44:55.187-03:00  INFO 13888 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-13T17:44:55.188-03:00  INFO 13888 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-13T17:44:55.189-03:00  INFO 13888 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-05-13T17:44:55.217-03:00  INFO 13888 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.704 seconds (process running for 3.537)
+2026-05-13T17:44:55.456-03:00  WARN 13888 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : Recurso no encontrado: Product '99' not found.
