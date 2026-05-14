@@ -60,7 +60,6 @@ public class UserAppControllerIntTest {
         role1.setPermissionSet(permissionSet);
         roleRepository.save(role1);
 
-
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role1);
 

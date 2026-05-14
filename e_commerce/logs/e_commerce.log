@@ -1,170 +1,549 @@
-2026-05-13T16:25:24.365-03:00  INFO 13208 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 13208 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:25:24.369-03:00  INFO 13208 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:25:26.056-03:00  WARN 13208 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+2026-05-14T17:21:11.318-03:00  INFO 16452 --- [e_commerce] [main] c.e.controller.UserAppControllerIntTest  : Starting UserAppControllerIntTest using Java 21.0.6 with PID 16452 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:21:11.322-03:00  INFO 16452 --- [e_commerce] [main] c.e.controller.UserAppControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:21:12.389-03:00  INFO 16452 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:21:12.489-03:00  INFO 16452 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:21:13.329-03:00  INFO 16452 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:21:13.445-03:00  INFO 16452 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:21:13.504-03:00  INFO 16452 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:21:13.874-03:00  INFO 16452 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:21:13.904-03:00  INFO 16452 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:21:14.129-03:00  INFO 16452 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:21:14.131-03:00  INFO 16452 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:21:14.156-03:00  WARN 16452 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:21:14.156-03:00  WARN 16452 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:21:14.181-03:00  INFO 16452 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:21:15.230-03:00  INFO 16452 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:21:15.309-03:00  INFO 16452 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:21:15.724-03:00  INFO 16452 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:21:15.729-03:00  WARN 16452 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:21:16.072-03:00  WARN 16452 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:21:16.856-03:00  INFO 16452 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:21:16.857-03:00  INFO 16452 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:21:16.858-03:00  INFO 16452 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-14T17:21:16.886-03:00  INFO 16452 --- [e_commerce] [main] c.e.controller.UserAppControllerIntTest  : Started UserAppControllerIntTest in 5.928 seconds (process running for 7.062)
+2026-05-14T17:21:17.833-03:00  WARN 16452 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : ACCESO DENEGADO: El usuario 'user' intentó acceder a un recurso sin permisos. Mensaje: Access Denied
+2026-05-14T17:21:17.846-03:00  WARN 16452 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : ACCESO DENEGADO: El usuario 'user' intentó acceder a un recurso sin permisos. Mensaje: Access Denied
+2026-05-14T17:21:18.269-03:00  WARN 16452 --- [e_commerce] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23505, SQLState: 23505
+2026-05-14T17:21:18.269-03:00 ERROR 16452 --- [e_commerce] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Violación de indice de Unicidad ó Clave primaria: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"
+Unique index or primary key violation: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"; SQL statement:
+insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [23505-232]
+2026-05-14T17:21:18.277-03:00 ERROR 16452 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : Violación de integridad de datos: 
 
-Using generated security password: 1c92d946-2d77-4b9c-995f-05a3c623fb2d
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [Violación de indice de Unicidad ó Clave primaria: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"
+Unique index or primary key violation: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"; SQL statement:
+insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [23505-232]] [insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:294) ~[spring-orm-6.2.11.jar:6.2.11]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256) ~[spring-orm-6.2.11.jar:6.2.11]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.2.11.jar:6.2.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560) ~[spring-orm-6.2.11.jar:6.2.11]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165) ~[spring-data-jpa-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.2.11.jar:6.2.11]
+	at jdk.proxy2/jdk.proxy2.$Proxy183.save(Unknown Source) ~[na:na]
+	at com.e_commerce.service.UserAppService.save(UserAppService.java:51) ~[classes/:na]
+	at com.e_commerce.controller.UserAppController.createUserApp(UserAppController.java:44) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.proceed(AuthorizationManagerBeforeMethodInterceptor.java:268) ~[spring-security-core-6.5.5.jar:6.5.5]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.attemptAuthorization(AuthorizationManagerBeforeMethodInterceptor.java:263) ~[spring-security-core-6.5.5.jar:6.5.5]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:196) ~[spring-security-core-6.5.5.jar:6.5.5]
+	at org.springframework.security.config.annotation.method.configuration.DeferringMethodInterceptor.invoke(DeferringMethodInterceptor.java:44) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.11.jar:6.2.11]
+	at com.e_commerce.controller.UserAppController$$SpringCGLIB$$0.createUserApp(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:181) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at com.e_commerce.security.config.filter.JwtTokenValidator.doFilterInternal(JwtTokenValidator.java:49) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:162) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.2.11.jar:6.2.11]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.2.11.jar:6.2.11]
+	at com.e_commerce.controller.UserAppControllerIntTest.saveUserAppConflictDuplicateUsername(UserAppControllerIntTest.java:325) ~[test-classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:775) ~[junit-platform-commons-1.12.2.jar:1.12.2]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:479) ~[junit-platform-commons-1.12.2.jar:1.12.2]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:161) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:152) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:91) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:112) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:94) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:87) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:216) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:212) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:137) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69) ~[junit-jupiter-engine-5.12.2.jar:5.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:201) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:170) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:94) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:59) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:142) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$1(InterceptingLauncher.java:39) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:38) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63) ~[junit-platform-launcher-1.12.2.jar:1.12.2]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57) ~[junit5-rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) ~[junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) ~[idea_rt.jar:na]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232) ~[junit-rt.jar:na]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55) ~[junit-rt.jar:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Violación de indice de Unicidad ó Clave primaria: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"
+Unique index or primary key violation: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"; SQL statement:
+insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [23505-232]] [insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performMutation(GetGeneratedKeysDelegate.java:116) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:47) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.doStaticInserts(InsertCoordinatorStandard.java:194) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.coordinateInsert(InsertCoordinatorStandard.java:132) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.insert(InsertCoordinatorStandard.java:95) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:85) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:682) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:293) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:274) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:324) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:394) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:308) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:224) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:136) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:177) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:95) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:79) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:55) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:761) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:745) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:364) ~[spring-orm-6.2.11.jar:6.2.11]
+	at jdk.proxy2/jdk.proxy2.$Proxy179.persist(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:320) ~[spring-orm-6.2.11.jar:6.2.11]
+	at jdk.proxy2/jdk.proxy2.$Proxy179.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:654) ~[spring-data-jpa-3.5.4.jar:3.5.4]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:734) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-3.5.4.jar:3.5.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.11.jar:6.2.11]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.11.jar:6.2.11]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.2.11.jar:6.2.11]
+	... 178 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Violación de indice de Unicidad ó Clave primaria: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"
+Unique index or primary key violation: "PUBLIC.UKr43af9ap4edm43mmtq01oddj6_INDEX_6 ON PUBLIC.users(username NULLS FIRST) VALUES ( /* 6 */ 'ADMIN' )"; SQL statement:
+insert into users (account_not_expired,account_not_locked,address,city,country,created_at,credential_not_expired,email,enable,last_name,name,password,phone,postal_code,state,updated_at,username) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.executeUpdateWithGeneratedKeys(CommandContainer.java:212) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:133) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:304) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:248) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:213) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:172) ~[h2-2.3.232.jar:2.3.232]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194) ~[hibernate-core-6.6.29.Final.jar:6.6.29.Final]
+	... 228 common frames omitted
 
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:25:26.071-03:00  INFO 13208 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:25:26.284-03:00  INFO 13208 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:25:26.284-03:00  INFO 13208 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:25:26.286-03:00  INFO 13208 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
-2026-05-13T16:25:26.321-03:00  INFO 13208 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.691 seconds (process running for 4.784)
-2026-05-13T16:29:35.252-03:00  INFO 4196 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 4196 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:29:35.253-03:00  INFO 4196 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:29:37.446-03:00  WARN 4196 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 874370d5-e681-44ad-8b20-f4e904f987ff
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:29:37.456-03:00  INFO 4196 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:29:37.610-03:00  INFO 4196 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:29:37.611-03:00  INFO 4196 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:29:37.612-03:00  INFO 4196 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-05-13T16:29:37.647-03:00  INFO 4196 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.727 seconds (process running for 3.547)
-2026-05-13T16:30:49.102-03:00  INFO 8680 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 8680 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:30:49.103-03:00  INFO 8680 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:30:51.388-03:00  WARN 8680 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: ca4f3f65-68ab-4660-a83a-a50b1a8bed15
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:30:51.397-03:00  INFO 8680 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:30:51.524-03:00  INFO 8680 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:30:51.525-03:00  INFO 8680 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:30:51.526-03:00  INFO 8680 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-05-13T16:30:51.558-03:00  INFO 8680 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.792 seconds (process running for 3.624)
-2026-05-13T16:33:25.553-03:00  INFO 9112 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 9112 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:33:25.556-03:00  INFO 9112 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:33:27.807-03:00  WARN 9112 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 955e45a5-29e5-45a9-9127-2044aa91e51b
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:33:27.819-03:00  INFO 9112 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:33:27.943-03:00  INFO 9112 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:33:27.947-03:00  INFO 9112 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:33:27.947-03:00  INFO 9112 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-05-13T16:33:27.980-03:00  INFO 9112 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.758 seconds (process running for 3.594)
-2026-05-13T16:33:44.924-03:00  INFO 9060 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 9060 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:33:44.928-03:00  INFO 9060 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:33:47.144-03:00  WARN 9060 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 67367913-9276-46d5-8656-cbc35efdf1c2
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:33:47.156-03:00  INFO 9060 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:33:47.300-03:00  INFO 9060 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:33:47.300-03:00  INFO 9060 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:33:47.304-03:00  INFO 9060 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
-2026-05-13T16:33:47.340-03:00  INFO 9060 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.752 seconds (process running for 3.561)
-2026-05-13T16:34:33.889-03:00  INFO 10904 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 10904 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:34:33.889-03:00  INFO 10904 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:34:36.177-03:00  WARN 10904 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: e39ac29c-c32b-4fa6-96b6-5bb9189ccd98
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:34:36.195-03:00  INFO 10904 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:34:36.351-03:00  INFO 10904 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:34:36.351-03:00  INFO 10904 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:34:36.352-03:00  INFO 10904 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-05-13T16:34:36.389-03:00  INFO 10904 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.835 seconds (process running for 3.655)
-2026-05-13T16:38:06.932-03:00  INFO 10104 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 10104 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:38:06.933-03:00  INFO 10104 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:38:09.234-03:00  WARN 10104 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 2d228175-72e7-4d20-8603-12baee1e1de7
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:38:09.243-03:00  INFO 10104 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:38:09.372-03:00  INFO 10104 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:38:09.372-03:00  INFO 10104 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:38:09.374-03:00  INFO 10104 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-05-13T16:38:09.403-03:00  INFO 10104 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.809 seconds (process running for 3.641)
-2026-05-13T16:57:20.875-03:00  INFO 2764 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 2764 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T16:57:20.877-03:00  INFO 2764 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T16:57:23.146-03:00  WARN 2764 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 36fb9cef-afad-424e-b4cf-98877bd2f1f3
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T16:57:23.155-03:00  INFO 2764 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T16:57:23.289-03:00  INFO 2764 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T16:57:23.291-03:00  INFO 2764 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T16:57:23.292-03:00  INFO 2764 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-05-13T16:57:23.327-03:00  INFO 2764 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.794 seconds (process running for 3.64)
-2026-05-13T17:00:14.141-03:00  INFO 11192 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 11192 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T17:00:14.143-03:00  INFO 11192 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T17:00:16.396-03:00  WARN 11192 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: c551ff03-f9ab-4c73-b6bf-83d06181c25f
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T17:00:16.415-03:00  INFO 11192 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T17:00:16.569-03:00  INFO 11192 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T17:00:16.569-03:00  INFO 11192 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T17:00:16.573-03:00  INFO 11192 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
-2026-05-13T17:00:16.620-03:00  INFO 11192 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.815 seconds (process running for 3.634)
-2026-05-13T17:02:54.210-03:00  INFO 7768 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 7768 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T17:02:54.210-03:00  INFO 7768 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T17:02:56.523-03:00  WARN 7768 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 0c701c64-fd95-450c-84f0-0ae0c001abde
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T17:02:56.531-03:00  INFO 7768 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T17:02:56.661-03:00  INFO 7768 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T17:02:56.661-03:00  INFO 7768 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T17:02:56.661-03:00  INFO 7768 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-05-13T17:02:56.691-03:00  INFO 7768 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.818 seconds (process running for 3.648)
-2026-05-13T17:42:40.068-03:00  INFO 2828 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 2828 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T17:42:40.069-03:00  INFO 2828 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T17:42:42.339-03:00  WARN 2828 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: cd7d3d3c-a965-4938-a56b-6d127139a05c
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T17:42:42.360-03:00  INFO 2828 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T17:42:42.599-03:00  INFO 2828 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T17:42:42.599-03:00  INFO 2828 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T17:42:42.601-03:00  INFO 2828 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-05-13T17:42:42.643-03:00  INFO 2828 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.915 seconds (process running for 3.766)
-2026-05-13T17:43:32.247-03:00  INFO 14048 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 14048 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T17:43:32.247-03:00  INFO 14048 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T17:43:34.581-03:00  WARN 14048 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: d487fd76-4bf4-41a5-80af-bf93a8ba21d9
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T17:43:34.593-03:00  INFO 14048 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T17:43:34.725-03:00  INFO 14048 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T17:43:34.725-03:00  INFO 14048 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T17:43:34.725-03:00  INFO 14048 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-05-13T17:43:34.753-03:00  INFO 14048 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.854 seconds (process running for 3.694)
-2026-05-13T17:44:52.861-03:00  INFO 13888 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Starting ProductControllerTest using Java 21.0.6 with PID 13888 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
-2026-05-13T17:44:52.862-03:00  INFO 13888 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : No active profile set, falling back to 1 default profile: "default"
-2026-05-13T17:44:55.057-03:00  WARN 13888 --- [e_commerce] [main] .s.s.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: 8b47d52d-3380-4e33-9184-7c0cfb3bf6e9
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2026-05-13T17:44:55.065-03:00  INFO 13888 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-05-13T17:44:55.187-03:00  INFO 13888 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-05-13T17:44:55.188-03:00  INFO 13888 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-05-13T17:44:55.189-03:00  INFO 13888 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-05-13T17:44:55.217-03:00  INFO 13888 --- [e_commerce] [main] c.e.controller.ProductControllerTest     : Started ProductControllerTest in 2.704 seconds (process running for 3.537)
-2026-05-13T17:44:55.456-03:00  WARN 13888 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : Recurso no encontrado: Product '99' not found.
+2026-05-14T17:21:18.302-03:00  WARN 16452 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : Recurso no encontrado: User '999' not found.
+2026-05-14T17:21:18.409-03:00  WARN 16452 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : Recurso no encontrado: User '9999' not found.
+2026-05-14T17:21:18.416-03:00  WARN 16452 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : ACCESO DENEGADO: El usuario 'user' intentó acceder a un recurso sin permisos. Mensaje: Access Denied
+2026-05-14T17:21:18.441-03:00  INFO 16452 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:21:18.443-03:00  INFO 16452 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:21:18.445-03:00  INFO 16452 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:21:40.940-03:00  INFO 16148 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 16148 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:21:40.940-03:00  INFO 16148 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:21:41.747-03:00  INFO 16148 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:21:41.860-03:00  INFO 16148 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 98 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:21:42.591-03:00  INFO 16148 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:21:42.695-03:00  INFO 16148 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:21:42.733-03:00  INFO 16148 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:21:42.985-03:00  INFO 16148 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:21:43.020-03:00  INFO 16148 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:21:43.152-03:00  INFO 16148 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:21:43.152-03:00  INFO 16148 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:21:43.169-03:00  WARN 16148 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:21:43.169-03:00  WARN 16148 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:21:43.185-03:00  INFO 16148 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:21:44.024-03:00  INFO 16148 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:21:44.086-03:00  INFO 16148 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:21:44.472-03:00  INFO 16148 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:21:44.472-03:00  WARN 16148 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:21:44.813-03:00  WARN 16148 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:21:45.609-03:00  INFO 16148 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:21:45.609-03:00  INFO 16148 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:21:45.609-03:00  INFO 16148 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-14T17:21:45.639-03:00  INFO 16148 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 4.978 seconds (process running for 5.861)
+2026-05-14T17:21:46.034-03:00  INFO 16148 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:21:46.035-03:00  INFO 16148 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:21:46.038-03:00  INFO 16148 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:26:09.258-03:00  INFO 14280 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 14280 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:26:09.259-03:00  INFO 14280 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:26:10.073-03:00  INFO 14280 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:26:10.182-03:00  INFO 14280 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 98 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:26:11.068-03:00  INFO 14280 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:26:11.145-03:00  INFO 14280 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:26:11.220-03:00  INFO 14280 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:26:11.529-03:00  INFO 14280 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:26:11.565-03:00  INFO 14280 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:26:11.738-03:00  INFO 14280 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:26:11.739-03:00  INFO 14280 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:26:11.758-03:00  WARN 14280 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:26:11.760-03:00  WARN 14280 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:26:11.779-03:00  INFO 14280 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:26:12.667-03:00  INFO 14280 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:26:12.733-03:00  INFO 14280 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:26:13.148-03:00  INFO 14280 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:26:13.149-03:00  WARN 14280 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:26:13.471-03:00  WARN 14280 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:26:14.182-03:00  INFO 14280 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:26:14.182-03:00  INFO 14280 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:26:14.183-03:00  INFO 14280 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-05-14T17:26:14.207-03:00  INFO 14280 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 5.228 seconds (process running for 6.084)
+2026-05-14T17:26:14.615-03:00  WARN 14280 --- [e_commerce] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23502, SQLState: 23502
+2026-05-14T17:26:14.617-03:00 ERROR 14280 --- [e_commerce] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : La columna "image_url" no permite valores nulos (NULL)
+NULL not allowed for column "image_url"; SQL statement:
+insert into product_images (image_url,is_primary,image_order,product_id) values (?,?,?,?) [23502-232]
+2026-05-14T17:26:14.647-03:00  INFO 14280 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:26:14.648-03:00  INFO 14280 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:26:14.650-03:00  INFO 14280 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:30:37.574-03:00  INFO 16692 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 16692 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:30:37.574-03:00  INFO 16692 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:30:38.419-03:00  INFO 16692 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:30:38.528-03:00  INFO 16692 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 95 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:30:39.365-03:00  INFO 16692 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:30:39.435-03:00  INFO 16692 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:30:39.476-03:00  INFO 16692 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:30:39.696-03:00  INFO 16692 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:30:39.721-03:00  INFO 16692 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:30:39.854-03:00  INFO 16692 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:30:39.858-03:00  INFO 16692 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:30:39.875-03:00  WARN 16692 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:30:39.875-03:00  WARN 16692 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:30:39.891-03:00  INFO 16692 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:30:40.757-03:00  INFO 16692 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:30:40.824-03:00  INFO 16692 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:30:41.174-03:00  INFO 16692 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:30:41.174-03:00  WARN 16692 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:30:41.466-03:00  WARN 16692 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:30:42.198-03:00  INFO 16692 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:30:42.198-03:00  INFO 16692 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:30:42.198-03:00  INFO 16692 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-14T17:30:42.226-03:00  INFO 16692 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 4.936 seconds (process running for 5.806)
+2026-05-14T17:30:42.669-03:00  INFO 16692 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:30:42.669-03:00  INFO 16692 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:30:42.671-03:00  INFO 16692 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:32:26.438-03:00  INFO 7112 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 7112 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:32:26.440-03:00  INFO 7112 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:32:27.299-03:00  INFO 7112 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:32:27.399-03:00  INFO 7112 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:32:28.154-03:00  INFO 7112 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:32:28.228-03:00  INFO 7112 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:32:28.267-03:00  INFO 7112 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:32:28.496-03:00  INFO 7112 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:32:28.521-03:00  INFO 7112 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:32:28.661-03:00  INFO 7112 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:32:28.663-03:00  INFO 7112 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:32:28.680-03:00  WARN 7112 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:32:28.681-03:00  WARN 7112 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:32:28.699-03:00  INFO 7112 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:32:29.525-03:00  INFO 7112 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:32:29.587-03:00  INFO 7112 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:32:29.994-03:00  INFO 7112 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:32:29.995-03:00  WARN 7112 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:32:30.307-03:00  WARN 7112 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:32:31.030-03:00  INFO 7112 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:32:31.031-03:00  INFO 7112 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:32:31.032-03:00  INFO 7112 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-05-14T17:32:31.060-03:00  INFO 7112 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 4.901 seconds (process running for 5.754)
+2026-05-14T17:32:31.593-03:00  INFO 7112 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:32:31.594-03:00  INFO 7112 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:32:31.596-03:00  INFO 7112 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:34:26.304-03:00  INFO 17264 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 17264 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:34:26.304-03:00  INFO 17264 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:34:27.115-03:00  INFO 17264 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:34:27.220-03:00  INFO 17264 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 91 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:34:28.011-03:00  INFO 17264 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:34:28.102-03:00  INFO 17264 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:34:28.152-03:00  INFO 17264 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:34:28.393-03:00  INFO 17264 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:34:28.425-03:00  INFO 17264 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:34:28.552-03:00  INFO 17264 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:34:28.552-03:00  INFO 17264 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:34:28.570-03:00  WARN 17264 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:34:28.570-03:00  WARN 17264 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:34:28.590-03:00  INFO 17264 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:34:29.446-03:00  INFO 17264 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:34:29.510-03:00  INFO 17264 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:34:29.837-03:00  INFO 17264 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:34:29.837-03:00  WARN 17264 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:34:30.155-03:00  WARN 17264 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:34:30.966-03:00  INFO 17264 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:34:30.966-03:00  INFO 17264 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:34:30.966-03:00  INFO 17264 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-14T17:34:30.996-03:00  INFO 17264 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 4.961 seconds (process running for 5.86)
+2026-05-14T17:34:31.514-03:00  INFO 17264 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:34:31.518-03:00  INFO 17264 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:34:31.518-03:00  INFO 17264 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:36:25.914-03:00  INFO 16492 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 16492 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:36:25.915-03:00  INFO 16492 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:36:26.738-03:00  INFO 16492 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:36:26.845-03:00  INFO 16492 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 89 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:36:27.609-03:00  INFO 16492 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:36:27.701-03:00  INFO 16492 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:36:27.749-03:00  INFO 16492 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:36:27.978-03:00  INFO 16492 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:36:28.008-03:00  INFO 16492 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:36:28.134-03:00  INFO 16492 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:36:28.136-03:00  INFO 16492 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:36:28.154-03:00  WARN 16492 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:36:28.154-03:00  WARN 16492 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:36:28.170-03:00  INFO 16492 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:36:29.017-03:00  INFO 16492 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:36:29.081-03:00  INFO 16492 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:36:29.459-03:00  INFO 16492 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:36:29.460-03:00  WARN 16492 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:36:29.789-03:00  WARN 16492 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:36:30.552-03:00  INFO 16492 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:36:30.553-03:00  INFO 16492 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:36:30.554-03:00  INFO 16492 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-05-14T17:36:30.594-03:00  INFO 16492 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 4.963 seconds (process running for 5.832)
+2026-05-14T17:36:31.127-03:00  INFO 16492 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:36:31.128-03:00  INFO 16492 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:36:31.129-03:00  INFO 16492 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:38:01.383-03:00  INFO 6428 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 6428 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:38:01.384-03:00  INFO 6428 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:38:02.184-03:00  INFO 6428 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:38:02.352-03:00  INFO 6428 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:38:03.048-03:00  INFO 6428 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:38:03.124-03:00  INFO 6428 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:38:03.171-03:00  INFO 6428 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:38:03.421-03:00  INFO 6428 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:38:03.447-03:00  INFO 6428 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:38:03.579-03:00  INFO 6428 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:38:03.582-03:00  INFO 6428 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:38:03.597-03:00  WARN 6428 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:38:03.598-03:00  WARN 6428 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:38:03.613-03:00  INFO 6428 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:38:04.477-03:00  INFO 6428 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:38:04.539-03:00  INFO 6428 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:38:04.890-03:00  INFO 6428 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:38:04.890-03:00  WARN 6428 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:38:05.243-03:00  WARN 6428 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:38:05.999-03:00  INFO 6428 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:38:06.000-03:00  INFO 6428 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:38:06.000-03:00  INFO 6428 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-14T17:38:06.030-03:00  INFO 6428 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 4.944 seconds (process running for 6.502)
+2026-05-14T17:38:06.564-03:00  INFO 6428 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:38:06.565-03:00  INFO 6428 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:38:06.567-03:00  INFO 6428 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
