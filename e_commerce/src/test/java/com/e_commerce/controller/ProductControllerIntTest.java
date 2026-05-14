@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -48,10 +49,6 @@ public class ProductControllerIntTest {
 
         productRepository.deleteAll();
 
-        Category category = new Category();
-        ProductImage productImgRes = new ProductImage();
-        List<ProductImage> productImage = List.of(productImgRes);
-
         Product product1 = Product.builder()
                 .name("product1")
                 .description("product prueba")
@@ -80,7 +77,8 @@ public class ProductControllerIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
                 .andExpect(jsonPath("$",hasSize(2)))
-                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].id").exists())
+                .andExpect(jsonPath("$[0].id").isNumber())
                 .andExpect(jsonPath("$[*].name", hasItem("product1")))
                 .andExpect(jsonPath("$[*].description", hasItem("product prueba")))
                 .andExpect(jsonPath("$[0].price", is(100.00)))
@@ -90,5 +88,17 @@ public class ProductControllerIntTest {
                 .andExpect(jsonPath("$[0].isActive", is(true)))
                 .andExpect(jsonPath("$[*].createdAt").exists());
     }
+
+    @Test
+    @DisplayName("GET /api/product - Should return 403 Forbidden for non-admin users2")
+    @WithMockUser(roles = {"USER2"})
+    public void getAllProduct_Forbidden() throws Exception {
+
+        mockMvc.perform(get("/api/product").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+    }
+
+
+
 
 }

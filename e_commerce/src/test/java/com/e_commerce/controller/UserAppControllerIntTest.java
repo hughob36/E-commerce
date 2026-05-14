@@ -543,6 +543,4 @@ public class UserAppControllerIntTest {
                 .andExpect(status().isNotFound());
     }
 
-
-
 }

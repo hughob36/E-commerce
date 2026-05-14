@@ -547,3 +547,70 @@ insert into product_images (image_url,is_primary,image_order,product_id) values 
 2026-05-14T17:38:06.564-03:00  INFO 6428 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-05-14T17:38:06.565-03:00  INFO 6428 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-05-14T17:38:06.567-03:00  INFO 6428 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T17:47:24.160-03:00  INFO 3636 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 3636 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T17:47:24.162-03:00  INFO 3636 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T17:47:25.006-03:00  INFO 3636 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T17:47:25.124-03:00  INFO 3636 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 103 ms. Found 10 JPA repository interfaces.
+2026-05-14T17:47:25.919-03:00  INFO 3636 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T17:47:26.013-03:00  INFO 3636 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T17:47:26.047-03:00  INFO 3636 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T17:47:26.295-03:00  INFO 3636 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T17:47:26.320-03:00  INFO 3636 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T17:47:26.452-03:00  INFO 3636 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T17:47:26.456-03:00  INFO 3636 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T17:47:26.472-03:00  WARN 3636 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T17:47:26.472-03:00  WARN 3636 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T17:47:26.491-03:00  INFO 3636 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T17:47:27.373-03:00  INFO 3636 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T17:47:27.438-03:00  INFO 3636 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:47:27.867-03:00  INFO 3636 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T17:47:27.867-03:00  WARN 3636 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T17:47:28.208-03:00  WARN 3636 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T17:47:28.992-03:00  INFO 3636 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T17:47:28.992-03:00  INFO 3636 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T17:47:28.992-03:00  INFO 3636 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-05-14T17:47:29.021-03:00  INFO 3636 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 5.143 seconds (process running for 5.996)
+2026-05-14T17:47:29.570-03:00  INFO 3636 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T17:47:29.575-03:00  INFO 3636 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T17:47:29.575-03:00  INFO 3636 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-14T18:03:14.469-03:00  INFO 13020 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Starting ProductControllerIntTest using Java 21.0.6 with PID 13020 (started by hugo_ in C:\Users\hugo_\IdeaProjects_JAVA_TODO\PORTAFOLIO_Proyecto_2\e_commerce)
+2026-05-14T18:03:14.470-03:00  INFO 13020 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : The following 1 profile is active: "test"
+2026-05-14T18:03:15.359-03:00  INFO 13020 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-14T18:03:15.460-03:00  INFO 13020 --- [e_commerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 10 JPA repository interfaces.
+2026-05-14T18:03:16.283-03:00  INFO 13020 --- [e_commerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-14T18:03:16.364-03:00  INFO 13020 --- [e_commerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-05-14T18:03:16.406-03:00  INFO 13020 --- [e_commerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-14T18:03:16.637-03:00  INFO 13020 --- [e_commerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-14T18:03:16.662-03:00  INFO 13020 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-14T18:03:16.809-03:00  INFO 13020 --- [e_commerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:vetdb user=VETUSER
+2026-05-14T18:03:16.811-03:00  INFO 13020 --- [e_commerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-14T18:03:16.828-03:00  WARN 13020 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-14T18:03:16.829-03:00  WARN 13020 --- [e_commerce] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-05-14T18:03:16.847-03:00  INFO 13020 --- [e_commerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-14T18:03:17.725-03:00  INFO 13020 --- [e_commerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-14T18:03:17.792-03:00  INFO 13020 --- [e_commerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T18:03:18.196-03:00  INFO 13020 --- [e_commerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-14T18:03:18.197-03:00  WARN 13020 --- [e_commerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-14T18:03:18.545-03:00  WARN 13020 --- [e_commerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-14T18:03:19.387-03:00  INFO 13020 --- [e_commerce] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-05-14T18:03:19.388-03:00  INFO 13020 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-05-14T18:03:19.390-03:00  INFO 13020 --- [e_commerce] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-05-14T18:03:19.419-03:00  INFO 13020 --- [e_commerce] [main] c.e.controller.ProductControllerIntTest  : Started ProductControllerIntTest in 5.261 seconds (process running for 6.121)
+2026-05-14T18:03:20.012-03:00  WARN 13020 --- [e_commerce] [main] c.e.exception.GlobalExceptionHandler     : ACCESO DENEGADO: El usuario 'user' intentó acceder a un recurso sin permisos. Mensaje: Access Denied
+2026-05-14T18:03:20.027-03:00  INFO 13020 --- [e_commerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-14T18:03:20.028-03:00  INFO 13020 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-14T18:03:20.030-03:00  INFO 13020 --- [e_commerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
