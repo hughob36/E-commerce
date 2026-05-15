@@ -90,13 +90,57 @@ public class ProductControllerIntTest {
     }
 
     @Test
-    @DisplayName("GET /api/product - Should return 403 Forbidden for non-admin users2")
-    @WithMockUser(roles = {"USER2"})
+    @DisplayName("GET /api/product - Should return 403 Forbidden for non-admin GUEST")
+    @WithMockUser(roles = {"GUEST"})
     public void getAllProduct_Forbidden() throws Exception {
 
         mockMvc.perform(get("/api/product").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden());
     }
+
+    @Test
+    @DisplayName("GET /api/product/{id} - Should allow access to ADMIN role")
+    @WithMockUser(roles = {"ADMIN"})
+    public void getProductById_AdminSuccess() throws Exception {
+
+        Long id = 1L;
+        productRepository.deleteAll();
+        Product product = Product.builder()
+                .name("product")
+                .description("product prueba")
+                .price(new BigDecimal("100.00"))
+                .stock(10)
+                .sku("pru1")
+                .imageUrl("www.prueba.com")
+                .isActive(true)
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        Product savedProduct = productRepository.save(product);
+
+        mockMvc.perform(get("/api/product/{id}", savedProduct.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.name", is("product")))
+                .andExpect(jsonPath("$.description", is("product prueba")))
+                .andExpect(jsonPath("$.price", is(100.00)))
+                .andExpect(jsonPath("$.stock", is(10)))
+                .andExpect(jsonPath("$.sku", is("pru1")))
+                .andExpect(jsonPath("$.imageUrl", is("www.prueba.com")))
+                .andExpect(jsonPath("$.isActive", is(true)))
+                .andExpect(jsonPath("$.createdAt").exists());
+    }
+
+    @Test
+    @DisplayName("GET /api/product/{id} - Should return 403 for roles other than USER or ADMIN")
+    @WithMockUser(roles = {"GUEST"})
+    public void getProductById_ForbiddenForGuest() throws Exception {
+        mockMvc.perform(get("/api/product/1"))
+                .andExpect(status().isForbidden());
+    }
+
 
 
 
