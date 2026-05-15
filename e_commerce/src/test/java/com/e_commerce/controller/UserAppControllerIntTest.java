@@ -218,7 +218,7 @@ public class UserAppControllerIntTest {
     @Test
     @DisplayName("POST /api/user - Should save a user successfully")
     @WithMockUser(roles = {"ADMIN"})
-    public void save_Permission() throws Exception {
+    public void save_UserApp() throws Exception {
 
         userAppRepository.deleteAll();
         roleRepository.deleteAll();
@@ -254,7 +254,6 @@ public class UserAppControllerIntTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userAppRequest)))
                 .andExpect(status().isCreated());
-
 
         UserApp userAppDB = userAppRepository.findAll().stream()
                 .filter(p -> "ADMIN".equals(p.getUsername()))

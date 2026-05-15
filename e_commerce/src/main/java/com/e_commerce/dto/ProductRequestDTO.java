@@ -3,10 +3,7 @@ package com.e_commerce.dto;
 import com.e_commerce.model.Category;
 import com.e_commerce.model.ProductImage;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -16,6 +13,7 @@ import java.util.List;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductRequestDTO {
 
     @NotBlank(message = "Name is required")

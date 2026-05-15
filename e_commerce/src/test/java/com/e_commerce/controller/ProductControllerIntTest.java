@@ -2,17 +2,22 @@ package com.e_commerce.controller;
 
 import com.e_commerce.dto.CategoryResponseSimpleDTO;
 import com.e_commerce.dto.ProductImageResponseDTO;
+import com.e_commerce.dto.ProductRequestDTO;
 import com.e_commerce.dto.ProductResponseDTO;
 import com.e_commerce.model.Category;
 import com.e_commerce.model.Product;
 import com.e_commerce.model.ProductImage;
+import com.e_commerce.repository.ICategoryRepository;
 import com.e_commerce.repository.IProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,9 +27,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -41,6 +48,9 @@ public class ProductControllerIntTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private ICategoryRepository categoryRepository;
 
     @Test
     @DisplayName("GET /api/product - Should return all user for ADMIN")
@@ -141,7 +151,44 @@ public class ProductControllerIntTest {
                 .andExpect(status().isForbidden());
     }
 
+    @Test
+    @DisplayName("POST /api/product - Should save a product successfully")
+    @WithMockUser(roles = {"ADMIN"})
+    public void save_Product() throws Exception {
 
+        categoryRepository.deleteAll();
+        Category category = Category.builder()
+                .name("electricidad")
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        Category savedCategory = categoryRepository.save(category);
+
+        productRepository.deleteAll();
+        ProductRequestDTO product = ProductRequestDTO.builder()
+                .name("product")
+                .description("product prueba")
+                .price(new BigDecimal("100.00"))
+                .stock(10)
+                .sku("pru1")
+                .categoryId(category.getId())
+                .imageUrl("www.prueba.com")
+                .isActive(true)
+                .build();
+
+        mockMvc.perform(post("/api/product")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(product)))
+                .andExpect(status().isCreated());
+
+        Product productDB = productRepository.findAll().stream()
+                .filter(p -> "pru1".equals(p.getSku()))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Product not found."));
+
+        assertThat(productDB.getId()).isNotNull();
+        assertThat(productDB.getSku()).isEqualTo("pru1");
+    }
 
 
 
