@@ -5,7 +5,9 @@ import com.e_commerce.model.Permission;
 import com.e_commerce.model.Role;
 import com.e_commerce.repository.IPermissionRepository;
 import com.e_commerce.repository.IRoleRepository;
+import com.e_commerce.repository.IUserAppRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,28 @@ public class RoleControllerIntTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private IUserAppRepository userRepository;
+
+
+    // 2. Crea este bloque BeforeEach para limpiar de forma segura antes de CADA test
+    @BeforeEach
+    void cleanDatabase() {
+        // Borramos primero los usuarios (que limpia la tabla intermedia user_roles)
+        userRepository.deleteAll();
+        // Ahora que user_roles está vacía, podemos borrar los roles sin violar restricciones
+        roleRepository.deleteAll();
+        // Opcional: limpiamos también los permisos si fuera necesario
+        permissionRepository.deleteAll();
+    }
+
+
+
     @Test
     @DisplayName("GET /api/role - Should return all roles for ADMIN")
     @WithMockUser(roles = {"ADMIN"})
     public void getAllRole_Success() throws Exception {
-
-        roleRepository.deleteAll();
+        //roleRepository.deleteAll();
         Set<Permission> permissionSet = new HashSet<>();
         Role role1 = new Role();
         role1.setRole("ADM");
