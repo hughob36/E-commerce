@@ -25,14 +25,14 @@ jobs:
 
       - name: Build JAR
         # Entramos a la carpeta para compilar
-        run: mvn -B clean package -DskipTests
+        run: mvn -B -DskipTests=false clean package
         working-directory: ./e_commerce
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: "E commerce ${{ github.ref_name }}"
+          name: "Ecommerce ${{ github.ref_name }}"
           body: "Release generado automáticamente. Incluye el artefacto ejecutable .jar"
           # Apuntamos a la ruta exacta donde Maven deja el JAR
           files: ./e_commerce/target/*.jar
