@@ -27,4 +27,4 @@ jobs:
           cache: 'maven'
 
       - name: Compilar y empaquetar
-        run: mvn -B clean package -DskipTests
+        run: mvn -B clean -DskipTests=false clean verify
