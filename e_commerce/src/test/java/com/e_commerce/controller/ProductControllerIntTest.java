@@ -25,7 +25,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -189,6 +188,8 @@ public class ProductControllerIntTest {
         assertThat(productDB.getId()).isNotNull();
         assertThat(productDB.getSku()).isEqualTo("pru1");
     }
+
+
 
 
 
