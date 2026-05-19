@@ -338,47 +338,6 @@ public class UserAppControllerIntTest {
     }
 
     @Test
-    @DisplayName("POST /api/user - Should return 403 Forbidden for non-admin users")
-    @WithMockUser(roles = {"USER"})
-    public void saveUserAppForbidden() throws Exception {
-
-        userAppRepository.deleteAll();
-        roleRepository.deleteAll();
-        Set<Permission> permissionSet = new HashSet<>();
-        Role role = new Role();
-        role.setRole("ADM");
-        role.setPermissionSet(permissionSet);
-        roleRepository.save(role);
-
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(role);
-
-        UserApp userApp = UserApp.builder()
-                .name("Juan")
-                .lastName("Perez")
-                .username("ADMIN")
-                .email("juan@mail.com")
-                .password("secret")
-                .enable(true)
-                .accountNotExpired(true)
-                .accountNotLocked(true)
-                .credentialNotExpired(true)
-                .roleSet(roleSet)
-                .phone("111111")
-                .address("user prueba")
-                .city("cityPrueba")
-                .state("estadoPrueba")
-                .postalCode("3232")
-                .country("countryPrueba")
-                .build();
-
-        mockMvc.perform(post("/api/user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userApp)))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
     @DisplayName("DELETE /api/user/{id} - Should delete user and return 204")
     @WithMockUser(roles = {"ADMIN"})
     public void deleteUserApp_Success() throws Exception {

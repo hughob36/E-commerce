@@ -59,7 +59,7 @@ public class UserAppController {
             @ApiResponse(responseCode = "409", description = "El usuario ya existe.")
     })
     @PostMapping
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<UserAppResponseDTO> createUserApp(@RequestBody  @Valid UserAppRequestDTO userAppRequestDTO) {
         UserAppResponseDTO newUserApp = userAppService.save(userAppRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUserApp);
