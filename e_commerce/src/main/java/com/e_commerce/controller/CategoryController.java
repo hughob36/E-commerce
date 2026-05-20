@@ -52,7 +52,8 @@ public class CategoryController {
 
     @Operation(summary = "Crear una categoria", description = "Registra una nueva categoria.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Categoria creada exitosamente.")
+            @ApiResponse(responseCode = "201", description = "Categoria creada exitosamente."),
+            @ApiResponse(responseCode = "409", description = "Categoria ya existe.")
     })
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -76,7 +77,8 @@ public class CategoryController {
     @Operation(summary = "Actualizar categoria", description = "Modifica los datos de una categoria existente según su ID.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Categoria actualizada correctamente."),
-            @ApiResponse(responseCode = "404", description = "No se encontró una categoria con el ID indicado.")
+            @ApiResponse(responseCode = "404", description = "No se encontró una categoria con el ID indicado."),
+            @ApiResponse(responseCode = "409", description = "Categoria ya existe.")
     })
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
