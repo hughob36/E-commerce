@@ -49,24 +49,22 @@ public class RoleControllerIntTest {
     private IUserAppRepository userRepository;
 
 
-    // 2. Crea este bloque BeforeEach para limpiar de forma segura antes de CADA test
+    // limpiar de forma segura antes de CADA test
     @BeforeEach
     void cleanDatabase() {
         // Borramos primero los usuarios (que limpia la tabla intermedia user_roles)
         userRepository.deleteAll();
         // Ahora que user_roles está vacía, podemos borrar los roles sin violar restricciones
         roleRepository.deleteAll();
-        // Opcional: limpiamos también los permisos si fuera necesario
+        // limpiamos  los permisos
         permissionRepository.deleteAll();
     }
-
-
 
     @Test
     @DisplayName("GET /api/role - Should return all roles for ADMIN")
     @WithMockUser(roles = {"ADMIN"})
     public void getAllRole_Success() throws Exception {
-        //roleRepository.deleteAll();
+
         Set<Permission> permissionSet = new HashSet<>();
         Role role1 = new Role();
         role1.setRole("ADM");

@@ -9,10 +9,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Collections;
 
 @Slf4j //creo el log automatico con lombok
 @RestControllerAdvice
@@ -26,13 +26,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)//me dio el error exacto-tenia que reconstruir el proyecto
-    public ResponseEntity<?> handleDataIntegrity(DataIntegrityViolationException e) {
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponseDTO> handleDataIntegrity(DataIntegrityViolationException ex) {
         // ERROR porque hubo un problema con la persistencia
-        log.error("Violación de integridad de datos: ", e);
-        // Esto te imprimirá en el JSON de respuesta el error real de SQL
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(Collections.singletonMap("error_detalle", e.getRootCause().getMessage()));
+        log.error("Violación de integridad de datos: ", ex);
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO("Data invalid.");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
@@ -57,7 +56,7 @@ public class GlobalExceptionHandler {
         // Esto se guarda en el archivo .log con fecha, hora y el error completo
         log.error("Error no controlado: ", ex);
         // Esto es lo que ve el usuario
-        ErrorResponseDTO errorResponse = new ErrorResponseDTO("Algo salió mal, reintente más tarde.");
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO("Something went wrong. Please try again later.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
@@ -70,9 +69,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
-    //esto agrege investigar
-    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponseDTO> handleValidationException(org.springframework.web.bind.MethodArgumentNotValidException ex) {
+    //investigar
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponseDTO> handleValidationException(MethodArgumentNotValidException ex) {
         // Obtenemos el primer mensaje de error de las anotaciones (@NotBlank, etc.)
         // 1. Obtenemos el campo y el mensaje para un log útil
         String fieldName = ex.getBindingResult().getFieldErrors().get(0).getField();
@@ -89,7 +88,7 @@ public class GlobalExceptionHandler {
 
     //cuando no tengo un permiso
     @ExceptionHandler(AuthorizationDeniedException.class)
-    public ResponseEntity<?> handleAccessDenied(AuthorizationDeniedException e) {
+    public ResponseEntity<ErrorResponseDTO> handleAccessDenied(AuthorizationDeniedException e) {
         // 1. Logueamos el intento de acceso no autorizado
         // Es vital para auditorias de seguridad
         // Obtenemos el nombre del usuario que esta logueado actualmente
@@ -97,8 +96,8 @@ public class GlobalExceptionHandler {
 
         log.warn("ACCESO DENEGADO: El usuario '{}' intentó acceder a un recurso sin permisos. Mensaje: {}",
                 currentUser, e.getMessage());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(Collections.singletonMap("error", "Access Denied: You do not have permission to perform this action."));
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO("Access Denied: You do not have permission to perform this action.");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponseDTO);
     }
 
 }
