@@ -3,7 +3,10 @@ package com.e_commerce.controller;
 import com.e_commerce.dto.PermissionRequestDTO;
 import com.e_commerce.model.Permission;
 import com.e_commerce.repository.IPermissionRepository;
+import com.e_commerce.repository.IRoleRepository;
+import com.e_commerce.repository.IUserAppRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +40,24 @@ public class PermissionControllerIntTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private IRoleRepository roleRepository;
+
+    @Autowired
+    private IUserAppRepository userAppRepository;
+
+    @BeforeEach
+    void cleanDatabase() {
+        userAppRepository.deleteAll();
+        roleRepository.deleteAll();
+        permissionRepository.deleteAll();
+    }
+
     @Test
     @DisplayName("GET /api/permission - Should return all permissions for ADMIN")
     @WithMockUser(roles = {"ADMIN"})
     public void getAllPermissions_Success() throws Exception {
-        // 1. Arrange: Limpiamos y cargamos datos de prueba
-        permissionRepository.deleteAll();
+
         Permission p1 = new Permission();
         p1.setPermissionName("CREATE");
         Permission p2 = new Permission();
@@ -189,7 +204,6 @@ public class PermissionControllerIntTest {
         Permission saved = permissionRepository.save(permission);
         Long idToDelete = saved.getId();
 
-        // 2. Act: Llamamos al endpoint de borrado
         mockMvc.perform(delete("/api/permission/{id}", idToDelete))
                 .andExpect(status().isNoContent()); // Verifica el 204 que pusiste en el return
 
