@@ -26,6 +26,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
+    @ExceptionHandler(InsufficientStockException.class)
+    public ResponseEntity<ErrorResponseDTO> handleInsufficientStockException(InsufficientStockException ex) {
+
+        log.warn("Items sin stock: {}", ex.getMessage());
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseDTO> handleDataIntegrity(DataIntegrityViolationException ex) {
         // ERROR porque hubo un problema con la persistencia

@@ -2,6 +2,7 @@ package com.e_commerce.service;
 
 import com.e_commerce.dto.CartItemRequestDTO;
 import com.e_commerce.dto.CartItemResponseDTO;
+import com.e_commerce.exception.InsufficientStockException;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.ICartItemMapper;
 import com.e_commerce.model.Cart;
@@ -10,7 +11,9 @@ import com.e_commerce.model.Product;
 import com.e_commerce.repository.ICartItemRepository;
 import com.e_commerce.repository.ICartRepository;
 import com.e_commerce.repository.IProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,17 +41,37 @@ public class CartItemService implements ICartItemService {
     }
 
     @Override
+    @Transactional
     public CartItemResponseDTO save(CartItemRequestDTO cartItemRequestDTO) {
-
-        CartItem cartItem = cartItemMapper.toCartItem(cartItemRequestDTO);
 
         Cart cart = cartRepository.findById(cartItemRequestDTO.getCartId())
                 .orElseThrow(() -> new ResourceNotFoundException("Id '"+ cartItemRequestDTO.getCartId() +"' not found."));
-        cartItem.setCart(cart);
 
         Product product = productRepository.findById(cartItemRequestDTO.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException("Id '"+ cartItemRequestDTO.getProductId() +"' not found."));
-        cartItem.setProduct(product);
+
+        // 2. Controlar si el producto ya está en el carrito para actualizar o crear
+        CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), product.getId())
+                .orElse(new CartItem()); // Si no existe, creamos uno nuevo
+
+        int newQuantity = cartItemRequestDTO.getQuantity();
+
+        if (cartItem.getId() != null) {
+            // Si ya existía, sumamos la cantidad que ya tenía en el carrito
+            newQuantity += cartItem.getQuantity();
+        }
+
+        // 3. Validar Stock con la semántica correcta (Error 400 en vez de 404)
+        if (newQuantity > product.getStock()) {
+            throw new InsufficientStockException("Not enough stock available. Requested: " + newQuantity + ", Available: " + product.getStock());
+        }
+
+        // 4. Seteas los datos finales
+        if (cartItem.getId() == null) {
+            cartItem.setCart(cart);
+            cartItem.setProduct(product);
+        }
+        cartItem.setQuantity(newQuantity);
 
         CartItem savedCartItem = cartItemRepository.save(cartItem);
         return cartItemMapper.toCartItemresponseDTO(savedCartItem);
