@@ -2,17 +2,16 @@ package com.e_commerce.service;
 
 import com.e_commerce.dto.OrderRequestDTO;
 import com.e_commerce.dto.OrderResponseDTO;
+import com.e_commerce.exception.InsufficientStockException;
 import com.e_commerce.exception.ResourceNotFoundException;
 import com.e_commerce.mapper.IOrderMapper;
-import com.e_commerce.model.Order;
-import com.e_commerce.model.OrderItem;
-import com.e_commerce.model.UserApp;
-import com.e_commerce.repository.IOrderItemRepository;
-import com.e_commerce.repository.IOrderRepository;
-import com.e_commerce.repository.IUserAppRepository;
+import com.e_commerce.model.*;
+import com.e_commerce.repository.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -23,6 +22,9 @@ public class OrderService implements IOrderService{
    private final IOrderMapper orderMapper;
    private final IUserAppRepository userAppRepository;
    private final IOrderItemRepository orderItemRepository;
+   private final IProductRepository productRepository;
+   private final ICartRepository cartRepository;
+   private final ICartItemRepository cartItemRepository;
 
     @Override
     public List<OrderResponseDTO> findAll() {
@@ -38,22 +40,71 @@ public class OrderService implements IOrderService{
     }
 
     @Override
+    @Transactional
     public OrderResponseDTO save(OrderRequestDTO orderRequestDTO) {
 
-       Order order = orderMapper.toOrder(orderRequestDTO);
-
         UserApp user = userAppRepository.findById(orderRequestDTO.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("User '"+ orderRequestDTO.getUserId() +"' not found."));
-        order.setUser(user);
+                .orElseThrow(() -> new ResourceNotFoundException("User with Id '" + orderRequestDTO.getUserId() + "' not found."));
 
-        List<OrderItem> orderItemList = orderItemRepository.findAllById(orderRequestDTO.getOrderItemsIds());
-        orderItemList.forEach(item -> item.setOrder(order));
+        // 2. Buscar el carrito del usuario primero (Lo necesitamos para obtener los productos a comprar)
+        Cart cart = cartRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user with Id '" + user.getId() + "'."));
+
+        // Obtener los items reales que el usuario tiene en el carrito
+        List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
+        if (cartItems.isEmpty()) {
+            throw new InsufficientStockException("Cannot create an order with an empty cart.");
+        }
+
+        // 3. Mapear DTO inicial a la entidad Orden
+        Order order = orderMapper.toOrder(orderRequestDTO);
+        order.setUser(user);
+        order.setStatus(OrderStatus.PENDING);
+
+        // 4. Transformar CartItems en OrderItems y procesar Stock simultáneamente
+        List<OrderItem> orderItemList = cartItems.stream().map(cartItem -> {
+            // Bloqueo pesimista por cada producto del carrito
+            Product product = productRepository.findByIdWithLock(cartItem.getProduct().getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Product with Id '" + cartItem.getProduct().getId() + "' not found."));
+
+            // Validar Stock
+            if (product.getStock() < cartItem.getQuantity()) {
+                throw new InsufficientStockException("Sorry, the product '" + product.getName() + "' run out of stock.");
+            }
+
+            // Restar Stock
+            product.setStock(product.getStock() - cartItem.getQuantity());
+            productRepository.save(product);
+
+            // Crear el OrderItem a partir del CartItem
+            OrderItem orderItem = new OrderItem();
+            orderItem.setProduct(product);
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setUnitPrice(product.getPrice());
+
+            // Convertimos Integer a BigDecimal y multiplicamos usando .multiply()
+            BigDecimal quantityBigDecimal = BigDecimal.valueOf(cartItem.getQuantity());
+            BigDecimal calculatedSubtotal = quantityBigDecimal.multiply(product.getPrice());
+
+            orderItem.setSubtotal(calculatedSubtotal);// Es vital clavar el precio del momento de la compra
+            orderItem.setOrder(order);
+
+            return orderItem;
+        }).toList();
+
         order.setOrderItems(orderItemList);
 
+        // 5. Guardar la orden y sus items (gracias al CascadeType.ALL en Order)
         Order savedOrder = orderRepository.save(order);
+
+        // 6. Vaciar los items del carrito de manera eficiente
+        cartItemRepository.deleteByCartId(cart.getId());
 
         return orderMapper.toOrderResponseDTO(savedOrder);
     }
+
+
+
 
     @Override
     public void deleteById(Long id) {

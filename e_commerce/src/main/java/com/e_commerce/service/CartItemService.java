@@ -45,10 +45,10 @@ public class CartItemService implements ICartItemService {
     public CartItemResponseDTO save(CartItemRequestDTO cartItemRequestDTO) {
 
         Cart cart = cartRepository.findById(cartItemRequestDTO.getCartId())
-                .orElseThrow(() -> new ResourceNotFoundException("Id '"+ cartItemRequestDTO.getCartId() +"' not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart with Id '"+ cartItemRequestDTO.getCartId() +"' not found."));
 
         Product product = productRepository.findById(cartItemRequestDTO.getProductId())
-                .orElseThrow(() -> new ResourceNotFoundException("Id '"+ cartItemRequestDTO.getProductId() +"' not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Product with Id '"+ cartItemRequestDTO.getProductId() +"' not found."));
 
         // 2. Controlar si el producto ya está en el carrito para actualizar o crear
         CartItem cartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), product.getId())
