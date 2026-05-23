@@ -14,6 +14,6 @@ public interface IProductRepository extends JpaRepository<Product,Long> {
 
     // El bloqueo pesimista asegura que nadie más edite este producto hasta que termine la transacción
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT p FROM Products p WHERE p.id = :id")
+    @Query("SELECT p FROM Product p WHERE p.id = :id")
     Optional<Product> findByIdWithLock(Long id);
 }

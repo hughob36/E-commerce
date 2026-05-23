@@ -171,7 +171,7 @@ public class PermissionControllerIntTest {
                 .andExpect(result -> {
                     // Opcional: Verificar que el JSON contiene la clave que definiste en el Handler
                     String response = result.getResponse().getContentAsString();
-                    assertThat(response).contains("error_detalle");
+                    assertThat(response).contains("Data invalid.");
                 });
 
         // 3. Verificación adicional: Que en la DB solo siga existiendo 1 registro

@@ -328,7 +328,7 @@ public class UserAppControllerIntTest {
                 .andExpect(status().isConflict())
                 .andExpect(result -> {
                     String response = result.getResponse().getContentAsString();
-                    assertThat(response).contains("error_detalle");
+                    assertThat(response).contains("Data invalid.");
                 });
 
         long count = userAppRepository.findAll().stream()

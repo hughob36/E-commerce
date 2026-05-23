@@ -196,7 +196,7 @@ public class RoleControllerIntTest {
                 .andExpect(status().isConflict())
                 .andExpect(result -> {
                     String response = result.getResponse().getContentAsString();
-                    assertThat(response).contains("error_detalle");
+                    assertThat(response).contains("Data invalid.");
                 });
 
         // 3. Verificación adicional: Que en la DB solo siga existiendo 1 registro
