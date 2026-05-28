@@ -1,8 +1,6 @@
 # E-Commerce API REST 🛒
 
-
 ¡Bienvenido al backend de nuestra plataforma de E-Commerce! Esta es una API REST robusta, escalable y segura construida con **Spring Boot**. El sistema gestiona todo el ciclo de venta de un comercio electrónico: desde la autenticación de usuarios, gestión de catálogos y carritos de compra, hasta el procesamiento de órdenes.
-
 
 ---
 
