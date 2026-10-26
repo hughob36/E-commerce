@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Despliegue (Próximamente)
+## 🚀 Despliegue
 
 El proyecto está diseñado para ser agnóstico al entorno y se desplegará utilizando la siguiente infraestructura:
 
@@ -12,8 +12,8 @@ El proyecto está diseñado para ser agnóstico al entorno y se desplegará util
 *   **Base de Datos:** [TiDB Cloud](https://pingcap.com/tidb-cloud) (Base de datos SQL distribuida compatible con MySQL, ideal para manejar alta concurrencia en e-commerce).
 
 > 🔗 **Links del Proyecto:**
-> *   **API en Vivo:** [Próximamente - URL de Render](https://render.com)
-> *   **Documentación Swagger UI:** [Próximamente - URL de Swagger en Render](https://render.com)
+> *   **API en Vivo:** [URL de Render](https://e-commerce-dxio.onrender.com/)
+> *   **Documentación Swagger UI:** [URL de Swagger en Render](https://e-commerce-dxio.onrender.com/swagger-ui/index.html)
 
 ---
 
