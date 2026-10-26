@@ -11,7 +11,7 @@ RUN mvn -B -DskipTests=false clean package
 
 # ETAPA 2: Ejecución (Runtime)
 # Usamos una imagen mucho más ligera (JRE) para correr la app
-FROM eclipse-temurin:21.0.13_3-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copiamos solo el JAR resultante de la etapa anterior
